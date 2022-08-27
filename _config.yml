@@ -3,7 +3,7 @@ title: The Sand Atlas
 subtitle: by SciGEM
 email: benjy.marks@sydney.edu.au
 description: Coming soon.
-baseurl: "/forty-jekyll-theme" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: sand-atlas.scigem.com # the base hostname & protocol for your site
 author: Benjy Marks
 street_address: School of Civil Engineering, The University of Sydney
