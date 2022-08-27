@@ -1,0 +1,20 @@
+{
+    "sydney-sand": {
+        "source-data": "http://where.data.is/from",
+        "image": "assets/images/gobi-desert-sand.jpg",
+        "description": "Beach sand from Sydney",
+        "origin-lat-lon": [
+            -33.7964782,
+            151.2846034
+        ]
+    },
+    "hostun-sand": {
+        "source-data": "http://where.data.is/from",
+        "image": "assets/images/unknown-sand.webp",
+        "description": "Hostun sand",
+        "origin-lat-lon": [
+            -33.7964782,
+            151.2846034
+        ]
+    },
+}
