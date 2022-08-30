@@ -11,4 +11,4 @@ The Sand Atlas is an effort to collate data describing the shape and morphology 
 - Baozhong Chen
 - [Edward Andò](https://people.epfl.ch/edward.ando?lang=en)
 - [Max Wiebicke](https://scholar.google.com/citations?user=h-57EAgAAAAJ)
-- [Giulia Guida](https://scholar.google.it/citations?user=Vn_OgZQAAAAJ)
+- [Giulia Guida](https://people.utwente.nl/g.guida)
