@@ -29,14 +29,20 @@
 				endif %}
 				{{ content }}
 
-				{{ page.title}} has the following properties which were reported <a href="{{ page.source_link }}">in
-					this publication</a>:
+				<p>This data was originally reported in <a href="{{ page.publication_url }}">this publication</a>. You can find the  <a href="{{ page.source_data_url }}">original data here</a>. The source data is licensed under a {{ page.license }} license.</p>
+
+				<p>For this sample we have the surfaces of {{ page.number_of_particles }} individual sand grains that you can <a href="{{ page.download_url }}">download here</a>.</p>
+
+				From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that {{ page.title }} has the following properties:
 				<ul>
 					<li>Size range: {{ page.size_range }}</li>
 					<li>Mineralogy: {{ page.mineralogy }}</li>
 					<li>Angularity: {{ page.angularity }}</li>
 				</ul>
-			</div>
+
+				
+				</div>
+
 		</section>
 
 	</div>
