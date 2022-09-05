@@ -41,3 +41,9 @@ exclude:
 - CONTRIBUTING.md
 - README.md
 - all_sands.json
+
+defaults:
+  - scope:
+      type: pages  # select all category pages
+    values:
+      layout: sand

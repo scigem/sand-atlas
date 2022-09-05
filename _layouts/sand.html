@@ -20,24 +20,24 @@
 		<section id="one">
 			<div class="inner">
 				<header class="major">
-					<h1>{{ page.title }}</h1>
+					<h1>{{ page.data.title }}</h1>
 				</header>
-				{% if page.image %}<span class="image right"><img src="{{ site.baseurl }}/{{ page.image }}" alt=""
+				{% if page.data.image %}<span class="image right"><img src="{{ site.baseurl }}/{{ page.data.image }}" alt=""
 						class="sand-thumbnail" /></span>{% endif %}
-				{% if page.lat_lon %}<iframe loading="lazy" allowfullscreen class="map right"
-					src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>{%
+				{% if page.data.lat_lon %}<iframe loading="lazy" allowfullscreen class="map right"
+					src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.data.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>{%
 				endif %}
 				{{ content }}
 
-				<p>This data was originally reported in <a href="{{ page.publication_url }}">this publication</a>. You can find the  <a href="{{ page.source_data_url }}">original data here</a>. The source data is licensed under a {{ page.license }} license.</p>
+				<p>This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>. You can find the  <a href="{{ page.data.source_data_url }}">original data here</a>. The source data is licensed under a {{ page.license }} license.</p>
 
-				<p>For this sample we have the surfaces of {{ page.number_of_particles }} individual sand grains that you can <a href="{{ page.download_url }}">download here</a>.</p>
+				<p>For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains that you can <a href="{{ page.data.download_url }}">download here</a>.</p>
 
-				From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that {{ page.title }} has the following properties:
+				From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that {{ page.data.title }} has the following properties:
 				<ul>
-					<li>Size range: {{ page.size_range }}</li>
-					<li>Mineralogy: {{ page.mineralogy }}</li>
-					<li>Angularity: {{ page.angularity }}</li>
+					<li>Size range: {{ page.data.size_range }}</li>
+					<li>Mineralogy: {{ page.data.mineralogy }}</li>
+					<li>Angularity: {{ page.data.angularity }}</li>
 				</ul>
 
 				
