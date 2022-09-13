@@ -15,7 +15,7 @@ module SandPlugin
         
         @site = site             # the current site instance.
         @base = site.source      # path to the source directory.
-        @dir  = page[0]          # the directory the page will reside in.
+        @dir  = 'sands/' + page[0]          # the directory the page will reside in.
   
         # All pages have the same filename, so define attributes straight away.
         @basename = 'index'      # filename without the extension.

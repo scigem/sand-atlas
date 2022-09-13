@@ -8,15 +8,15 @@
   {% include header.html %}
   <!-- {{ content }} -->
 
-  THIS IS A SAND
-  <!-- Main -->
+    <!-- Main -->
   <div id="main" class="alt">
 
     <!-- One -->
     <section id="one">
       <div class="inner">
         {% for page in site.pages %}
-          {% if page.dir == '/sands/' %}
+          {% assign path = page.dir | slice: 1, 5 %}
+          {% if path == 'sands' %}
             {% if page.title != 404 %}
               <header class="major">
                 <h1><a href={{page.url}}>{{ page.title }}</a></h1>
@@ -25,6 +25,7 @@
                 <span class="image main"><img src="{{ site.baseurl }}/{{ post.image }}" alt="" /></span>
               {% endif %}
           <!-- {% if post.date %}<p>{{ post.date }}</p>{% endif %} -->
+              <p><a href="{{ page.url }}">{{ page.description }}</a></p>
               <p>{{ page.content }}</p>
             {% endif %}
           {% endif %}
