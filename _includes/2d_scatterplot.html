@@ -1,0 +1,84 @@
+<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+<div id="2d_scatterplot_div"></div>
+
+<script>
+    // from http://bl.ocks.org/mbostock/4349187
+    
+    var trace1 = {
+    x: [{{ include.x }}],
+    y: [{{ include.y }}],
+    mode: 'markers',
+    name: 'points',
+    marker: {
+        color: 'rgb(255,255,255)',
+        size: 2,
+        opacity: 0.4
+    },
+    type: 'scatter'
+    };
+    var trace2 = {
+    x: [{{ include.x }}],
+    y: [{{ include.y }}],
+    name: 'density',
+    ncontours: 20,
+    colorscale: 'inferno',
+    reversescale: false,
+    showscale: false,
+    type: 'histogram2dcontour',
+    };
+    var trace3 = {
+    x: [{{ include.x }}],
+    name: {{ include.x_label }},
+    marker: {color: 'rgb(255,255,255)'},
+    yaxis: 'y2',
+    type: 'histogram'
+    };
+    var trace4 = {
+    y: [{{ include.y }}],
+    name: {{ include.y_label }},
+    marker: {color: 'rgb(255,255,255)'},
+    xaxis: 'x2',
+    type: 'histogram'
+    };
+    var data = [trace1, trace2, trace3, trace4];
+    var layout = {
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    showlegend: false,
+    autosize: false,
+    width: 600,
+    height: 550,
+    margin: {t: 50},
+    hovermode: 'closest',
+    bargap: 0,
+    font: {
+        // family: 'Courier New, monospace',
+        size: 16,
+        color: '#FFF'
+    },
+    xaxis: {
+        domain: [0, 0.85],
+        showgrid: false,
+        zeroline: false,
+        title: {{ include.x_label }},
+    },
+    yaxis: {
+        domain: [0, 0.85],
+        showgrid: false,
+        zeroline: false,
+        title: {{ include.y_label }},
+    },
+    xaxis2: {
+        domain: [0.85, 1],
+        showgrid: false,
+        zeroline: false
+    },
+    yaxis2: {
+        domain: [0.85, 1],
+        showgrid: false,
+        zeroline: false
+    }
+    };
+    Plotly.newPlot('2d_scatterplot_div', data, layout);
+</script>

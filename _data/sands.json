@@ -11,7 +11,9 @@
         "size_range": "0.1 mm to 1 mm",
         "mineralogy": "Quartz",
         "angularity": "Angular",
-        "number_of_particles": 220
+        "number_of_particles": 220,
+        "aspect_ratio": "0.1,0.5,0.2,0.3,0.5,0.7,0.2,0.3,0.5,0.7",
+        "roughness": "0.3,0.2,0.5,0.4,0.1,0.3,0.5,0.6,0.8,0.9"
     },
     "hostun-sand": {
         "title": "Hostun sand",
@@ -25,6 +27,8 @@
         "size_range": "0.1 mm to 1 mm",
         "mineralogy": "Quartz",
         "angularity": "Angular",
-        "number_of_particles": 220
+        "number_of_particles": 220,
+        "aspect_ratio": "0.1,0.5,0.2,0.3,0.5,0.7,0.2,0.3,0.5,0.7",
+        "roughness": "0.3,0.2,0.5,0.4,0.1,0.3,0.5,0.6,0.8,0.9"
     },
 }
