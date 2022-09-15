@@ -40,9 +40,9 @@
 					<li>Angularity: {{ page.data.angularity }}</li>
 				</ul>
 
-				<div class="graph right">
-					{% include 2d_scatterplot.html x=page.data.roughness y=page.data.aspect_ratio x_label='"Roughness"' y_label='"Aspect ratio"' %}
-				</div>
+				<br>
+				
+				{% include 2d_scatterplot.html x=page.data.roughness y=page.data.aspect_ratio x_label='"Roughness"' y_label='"Aspect ratio"' %}
 
 				</div>
 

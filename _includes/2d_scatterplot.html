@@ -1,10 +1,10 @@
 <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
 
-<div id="2d_scatterplot_div"></div>
+<div class="graph main" id="2d_scatterplot_div"></div>
 
 <script>
-    // from http://bl.ocks.org/mbostock/4349187
-    
+    // from https://plotly.com/javascript/2d-density-plots/
+    // console.log(document.getElementsByClassName("graph")[1].offsetWidth)
     var trace1 = {
     x: [{{ include.x }}],
     y: [{{ include.y }}],
@@ -12,8 +12,8 @@
     name: 'points',
     marker: {
         color: 'rgb(255,255,255)',
-        size: 2,
-        opacity: 0.4
+        size: 5,
+        opacity: 1
     },
     type: 'scatter'
     };
@@ -21,9 +21,9 @@
     x: [{{ include.x }}],
     y: [{{ include.y }}],
     name: 'density',
-    ncontours: 20,
-    colorscale: 'inferno',
-    reversescale: false,
+    ncontours: 10,
+    colorscale: 'YlGnBu',
+    reversescale: true,
     showscale: false,
     type: 'histogram2dcontour',
     };
@@ -47,8 +47,8 @@
     plot_bgcolor: 'rgba(0,0,0,0)',
     showlegend: false,
     autosize: false,
-    width: 500,
-    height: 400,
+    width:  0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
+    height: 0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
     margin: {t: 0},
     hovermode: 'closest',
     bargap: 0,
@@ -62,12 +62,14 @@
         showgrid: false,
         zeroline: false,
         title: {{ include.x_label }},
+        range: [0,1]
     },
     yaxis: {
         domain: [0, 0.85],
         showgrid: false,
         zeroline: false,
         title: {{ include.y_label }},
+        range: [0,1]
     },
     xaxis2: {
         domain: [0.865, 1],
