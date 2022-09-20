@@ -1,6 +1,12 @@
 <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
 
-<div class="graph main" id="2d_scatterplot_div"></div>
+<section id="graphs">
+    <div class="inner">
+        <!-- <div > -->
+            <div class="graph right" id="2d_scatterplot_div"></div>
+        <!-- </div> -->
+    </div>
+</section>
 
 <script>
     // from https://plotly.com/javascript/2d-density-plots/
@@ -21,7 +27,7 @@
     x: [{{ include.x }}],
     y: [{{ include.y }}],
     name: 'density',
-    ncontours: 10,
+    ncontours: 20,
     colorscale: 'YlGnBu',
     reversescale: true,
     showscale: false,
@@ -46,10 +52,10 @@
     paper_bgcolor: 'rgba(0,0,0,0)',
     plot_bgcolor: 'rgba(0,0,0,0)',
     showlegend: false,
-    autosize: false,
-    width:  0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
-    height: 0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
-    margin: {t: 0},
+    autosize: true,
+    // width:  0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
+    // height: 0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
+    margin: {t: 0, r: 0, l:60, b:60},
     hovermode: 'closest',
     bargap: 0,
     font: {
@@ -82,5 +88,6 @@
         zeroline: false
     }
     };
-    Plotly.newPlot('2d_scatterplot_div', data, layout);
+    var config = {responsive: true}
+    Plotly.newPlot('2d_scatterplot_div', data, layout, config);
 </script>
