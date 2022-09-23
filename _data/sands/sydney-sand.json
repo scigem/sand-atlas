@@ -1,0 +1,16 @@
+{
+    "title": "Sydney sand",
+    "description": "Hand picked from Manly Beach",
+    "image": "assets/images/gobi-desert-sand.jpg",
+    "lat_lon": "-33.7964782,151.2846034",
+    "source_data_url": "https://www.fake.link",
+    "publication_url": "https://www.fake.link",
+    "download_url": "https://www.fake.link",
+    "license": "CC BY-SA 4.0",
+    "size_range": "0.1 mm to 1 mm",
+    "mineralogy": "Quartz",
+    "angularity": "Angular",
+    "number_of_particles": 220,
+    "aspect_ratio": "0.1,0.5,0.2,0.3,0.5,0.7,0.2,0.3,0.5,0.7",
+    "circularity": "0.3,0.2,0.5,0.4,0.1,0.3,0.5,0.6,0.8,0.9"
+}
