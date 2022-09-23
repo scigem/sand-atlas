@@ -34,7 +34,11 @@
 				{% include 2d_scatterplot.html x=page.data.circularity y=page.data.aspect_ratio x_label='"Circularity"' y_label='"Aspect ratio"' %}
 				{{ content }}
 
-				<p>This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>. You can find the  <a href="{{ page.data.source_data_url }}">original data here</a>. The source data is licensed under a {{ page.license }} license.</p>
+				<p>
+				{% if page.data.publication_url %}This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>.{% endif %}
+				{% if page.data.source_data_url %}You can find the  <a href="{{ page.data.source_data_url }}">original data here</a>. {% endif %}
+				{% if page.data.license %}The source data is licensed under a {{ page.data.license }} license.{% endif %}
+				All derivative data shown here is licensed under a CC-BY 4.0 license, and can be used freely with attribution.</p>
 
 				<p>For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains that you can <a href="{{ page.data.download_url }}">download here</a>.</p>
 
