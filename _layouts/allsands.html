@@ -21,12 +21,17 @@
               <header class="major">
                 <h1><a href={{page.url}}>{{ page.title }}</a></h1>
               </header>
-              {% if page.image %}
-                <span class="image main"><img src="{{ site.baseurl }}/{{ post.image }}" alt="" /></span>
-              {% endif %}
           <!-- {% if post.date %}<p>{{ post.date }}</p>{% endif %} -->
-              <p><a href="{{ page.url }}">{{ page.description }}</a></p>
-              <p>{{ page.content }}</p>
+              <!-- <p><a href="{{ page.url }}">{{ page.description }}</a></p> -->
+              <!-- <p>{{ page.content }}</p> -->
+              {% if page.data.image %}<div class="image right"><img src="{{ site.baseurl }}/{{ page.data.image }}" alt=""
+                class="sand-thumbnail" /></div>{% endif %}
+            {% if page.data.lat_lon %}<iframe loading="lazy" allowfullscreen class="map right"
+              src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.data.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>{%
+            endif %}
+    
+            {% include 2d_scatterplot.html title=page.data.title x=page.data.circularity y=page.data.aspect_ratio x_label='"Circularity"' y_label='"Aspect ratio"' %}
+            {{ content }}
             {% endif %}
           {% endif %}
         {% endfor %}

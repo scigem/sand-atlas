@@ -3,7 +3,7 @@
 <section id="graphs">
     <div class="inner">
         <!-- <div > -->
-            <div class="graph right" id="2d_scatterplot_div"></div>
+            <div class="graph right" id="2d_scatterplot_{{ include.title }}"></div>
         <!-- </div> -->
     </div>
 </section>
@@ -89,5 +89,5 @@
     }
     };
     var config = {responsive: true}
-    Plotly.newPlot('2d_scatterplot_div', data, layout, config);
+    Plotly.newPlot('2d_scatterplot_{{ include.title }}', data, layout, config);
 </script>
