@@ -31,7 +31,7 @@
 					src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.data.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>{%
 				endif %}
 
-				{% include 2d_scatterplot.html x=page.data.circularity y=page.data.aspect_ratio x_label='"Circularity"' y_label='"Aspect ratio"' %}
+				{% include 2d_scatterplot.html title=page.data.title x=page.data.circularity y=page.data.aspect_ratio x_label='"Circularity"' y_label='"Aspect ratio"' %}
 				{{ content }}
 
 				<p>
@@ -49,9 +49,13 @@
 					<li>Angularity: {{ page.data.angularity }}</li>
 				</ul>
 
-				</div>
+				{% include video_gallery.html title=page.dir number_of_particles=page.data.number_of_particles %}
+
+			</div>
 
 		</section>
+
+		
 
 	</div>
 	

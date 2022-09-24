@@ -1,0 +1,9 @@
+<section id="video_gallery">
+    <div class="inner">
+        <h2>What the particles look like</h2>
+        {% assign range = (1..include.number_of_particles) %}
+        {% for i in range %}
+            <video class="gallery right" autoplay loop muted src="../../assets{{ include.title }}particle_{{ i }}.mp4"></video>
+        {% endfor %}
+    </div>
+</section>
