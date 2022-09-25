@@ -39,4 +39,7 @@ os.system("ffmpeg -f concat -safe 0 -i sources.txt -c copy all_particles.webm")
 
 # Step 4: Cleanup
 os.system("rm grid_*.webm")
-os.system(f"mv all_particles.webm ~/code/sand-atlas/assets/sands/{sand_type}/")
+# Reduce file size if necessary
+os.system("ffmpeg -i all_particles.webm -crf 28 all_particles_smaller.mp4")
+os.system(
+    f"mv all_particles_smaller.mp4 ~/code/sand-atlas/assets/sands/{sand_type}/all_particles.mp4")
