@@ -21,6 +21,12 @@ scene.render.resolution_x = 1000
 scene.render.resolution_y = 1000
 scene.render.resolution_percentage = 100
 
+bpy.context.scene.render.film_transparent = True
+# bpy.data.worlds['World'].color = [16/255, 16/255, 16/255]
+# bpy.ops.world.new()
+# bpy.context.scene.world.color = [16/255, 16/255, 16/255]
+
+
 cam_data = bpy.data.cameras.new("Cam")
 cam_ob = bpy.data.objects.new(name="Cam", object_data=cam_data)
 scene.collection.objects.link(cam_ob)
