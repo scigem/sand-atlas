@@ -12,4 +12,4 @@ The Sand Atlas is an effort to collate data describing the shape and morphology 
 - [Edward Andò](https://people.epfl.ch/edward.ando?lang=en)
 - [Max Wiebicke](https://scholar.google.com/citations?user=h-57EAgAAAAJ)
 - [Giulia Guida](https://people.utwente.nl/g.guida)
-- [Erica Tudisco](https://portal.research.lu.se/en/persons/erika-tudisco)
+- [Erika Tudisco](https://portal.research.lu.se/en/persons/erika-tudisco)
