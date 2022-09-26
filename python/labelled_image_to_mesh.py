@@ -35,7 +35,8 @@ for i in tqdm.tqdm(range(1, num_particles)):
     # plt.show()
 
     this_particle = crop == props[i].label
-    # tifffile.imwrite('tt.tiff', this_particle.astype('uint8'))
+
+    # tifffile.imwrite(f'particle_{i}.tiff', this_particle.astype('uint8'))
 
     # now get meshed surface
     # try:
