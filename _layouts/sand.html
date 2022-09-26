@@ -42,12 +42,12 @@
 
 				<p>For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains that you can <a href="{{ page.data.download_url }}">download here</a>.</p>
 
-				From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that {{ page.data.title }} has the following properties:
+				<!-- From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that {{ page.data.title }} has the following properties:
 				<ul>
 					<li>Size range: {{ page.data.size_range }}</li>
 					<li>Mineralogy: {{ page.data.mineralogy }}</li>
 					<li>Angularity: {{ page.data.angularity }}</li>
-				</ul>
+				</ul> -->
 
 				{% include video_gallery.html title=page.dir number_of_particles=page.data.number_of_particles %}
 
