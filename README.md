@@ -1,3 +1,3 @@
 # The Sand Atlas
 
-More infromation coming soon.
+[See it live here](https://sand-atlas.scigem.com/)
