@@ -3,6 +3,10 @@ import sys
 import numpy
 from math import radians
 
+# run with:
+# blender --background --python mesh_to_blender.py -- /path/to/file.npz
+
+
 filename = sys.argv[-1]
 
 # make an empty blender file
