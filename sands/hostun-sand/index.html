@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Hostun sand | The Sand Atlas</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+</head>
+
+
+<body>
+
+	<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Header -->
+	<header id="header" >
+		<a href="https://sand-atlas.scigem.com//" class="logo"><strong>The Sand Atlas</strong> <span></span></a>
+		<nav>
+			<a href="#menu">Menu</a>
+		</nav>
+	</header>
+
+	<!-- Menu -->
+	<nav id="menu">
+		<ul class="links">
+			
+			
+			
+			
+			
+			
+			
+			
+			<li><a href="https://sand-atlas.scigem.com//">Home</a></li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li><a href="https://sand-atlas.scigem.com/about.html">What is the Sand Atlas?</a></li>
+			
+			
+			
+			<li><a href="https://sand-atlas.scigem.com/all_sands.html">All sands</a></li>
+			
+			
+			
+			
+			
+			
+			
+			
+		</ul>
+		<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+	</nav>
+
+
+	<!-- Main -->
+	<div id="main" class="alt">
+
+		<!-- One -->
+		<section id="one">
+			<div class="inner">
+				<header class="major">
+					<h1>Hostun sand</h1>
+				</header>
+			<!-- </div> -->
+			<!-- <div class="inner"> -->
+			<!-- </section> -->
+				<div class="image right"><img src="/assets/images/unknown-sand.webp" alt=""
+						class="sand-thumbnail" /></div>
+				<iframe loading="lazy" allowfullscreen class="map right"
+					src="https://www.google.com/maps/embed/v1/view?zoom=15&center=45.0384521,5.197219&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>
+
+				<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+<section id="graphs">
+    <div class="inner">
+        <!-- <div > -->
+            <div class="graph right" id="2d_scatterplot_Hostun sand"></div>
+        <!-- </div> -->
+    </div>
+</section>
+
+<script>
+    // from https://plotly.com/javascript/2d-density-plots/
+    // console.log(document.getElementsByClassName("graph")[1].offsetWidth)
+    var trace1 = {
+    x: [3.0425556720101663,4.200082929040119,3.85850338541585,4.636982095023619,3.2012828788326493,3.3934789295878205,3.093689255019297,3.50508921816725,3.2289099089663744,3.3272832551890152,4.046037414122772,3.162065708259198,3.766740960750464,3.3254815890948954,2.931065203741588,3.6639949083133616,4.093371313361323,3.159378375872301,2.742251515120521,2.9721443379108754,3.235216969682828,3.645179356504598,4.501380132193287,3.036726584233988,3.7718058956575646,3.24530056121625,3.3207463241963406,2.52532554136479,3.483570260653753,3.093277931318314,3.9180654701943642,3.17725741912287,3.670932019794719,3.33179192314646,2.964614676616438,3.659223934754531,3.429753545512738,2.5728327341800923,2.875207824077413,3.525615977263537,3.7995570472919047,3.5579390991276467,3.463848414496153,2.796200273622064,3.4490031689097727,2.665795738048055,3.592153051334208,3.1080185284412694,3.0789813111560704,3.778730805130344,4.27082762881039,4.437192323250032,4.516978113221872],
+    y: [3.2864052363068152,1.5977963680425276,1.338018455757206,1.6770602862461201,3.006222060466888,1.592035616826793,1.7093837459553076,2.045756011718494,4.098230674467194,1.626607739216918,2.157857624218058,2.0951105687542597,1.86117890755707,1.94064412817425,2.3314031324959084,2.5895077977382557,1.636081479081663,1.5691293193997713,2.040656448983855,1.5693243011564482,2.3263509309275925,1.3922453955251461,1.4809109865496495,1.9052757286187212,2.102324955701321,1.7848539991708965,3.3497500302647962,1.5170709859806109,1.4598185842342615,1.6301462414202914,2.044119334039354,1.5937192315273918,1.5377499558714982,2.533973269288213,2.231164319150769,2.366540581176091,2.267369270599172,3.0085437729783617,2.3259130271835535,1.3049737937953059,2.349858269564293,1.6985010911697482,2.1087068898839623,1.3229987535114363,3.4523087108382757,2.343195280076124,1.640486741838698,2.249243017123469,1.866274743001263,1.825889522684787,3.8603512061549283,1.5507672199655849,1.9193522038073334],
+    mode: 'markers',
+    name: 'points',
+    marker: {
+        color: 'rgb(255,255,255)',
+        size: 5,
+        opacity: 1
+    },
+    type: 'scatter'
+    };
+    var trace2 = {
+    x: [3.0425556720101663,4.200082929040119,3.85850338541585,4.636982095023619,3.2012828788326493,3.3934789295878205,3.093689255019297,3.50508921816725,3.2289099089663744,3.3272832551890152,4.046037414122772,3.162065708259198,3.766740960750464,3.3254815890948954,2.931065203741588,3.6639949083133616,4.093371313361323,3.159378375872301,2.742251515120521,2.9721443379108754,3.235216969682828,3.645179356504598,4.501380132193287,3.036726584233988,3.7718058956575646,3.24530056121625,3.3207463241963406,2.52532554136479,3.483570260653753,3.093277931318314,3.9180654701943642,3.17725741912287,3.670932019794719,3.33179192314646,2.964614676616438,3.659223934754531,3.429753545512738,2.5728327341800923,2.875207824077413,3.525615977263537,3.7995570472919047,3.5579390991276467,3.463848414496153,2.796200273622064,3.4490031689097727,2.665795738048055,3.592153051334208,3.1080185284412694,3.0789813111560704,3.778730805130344,4.27082762881039,4.437192323250032,4.516978113221872],
+    y: [3.2864052363068152,1.5977963680425276,1.338018455757206,1.6770602862461201,3.006222060466888,1.592035616826793,1.7093837459553076,2.045756011718494,4.098230674467194,1.626607739216918,2.157857624218058,2.0951105687542597,1.86117890755707,1.94064412817425,2.3314031324959084,2.5895077977382557,1.636081479081663,1.5691293193997713,2.040656448983855,1.5693243011564482,2.3263509309275925,1.3922453955251461,1.4809109865496495,1.9052757286187212,2.102324955701321,1.7848539991708965,3.3497500302647962,1.5170709859806109,1.4598185842342615,1.6301462414202914,2.044119334039354,1.5937192315273918,1.5377499558714982,2.533973269288213,2.231164319150769,2.366540581176091,2.267369270599172,3.0085437729783617,2.3259130271835535,1.3049737937953059,2.349858269564293,1.6985010911697482,2.1087068898839623,1.3229987535114363,3.4523087108382757,2.343195280076124,1.640486741838698,2.249243017123469,1.866274743001263,1.825889522684787,3.8603512061549283,1.5507672199655849,1.9193522038073334],
+    name: 'density',
+    ncontours: 20,
+    colorscale: 'YlGnBu',
+    reversescale: true,
+    showscale: false,
+    type: 'histogram2dcontour',
+    };
+    var trace3 = {
+    x: [3.0425556720101663,4.200082929040119,3.85850338541585,4.636982095023619,3.2012828788326493,3.3934789295878205,3.093689255019297,3.50508921816725,3.2289099089663744,3.3272832551890152,4.046037414122772,3.162065708259198,3.766740960750464,3.3254815890948954,2.931065203741588,3.6639949083133616,4.093371313361323,3.159378375872301,2.742251515120521,2.9721443379108754,3.235216969682828,3.645179356504598,4.501380132193287,3.036726584233988,3.7718058956575646,3.24530056121625,3.3207463241963406,2.52532554136479,3.483570260653753,3.093277931318314,3.9180654701943642,3.17725741912287,3.670932019794719,3.33179192314646,2.964614676616438,3.659223934754531,3.429753545512738,2.5728327341800923,2.875207824077413,3.525615977263537,3.7995570472919047,3.5579390991276467,3.463848414496153,2.796200273622064,3.4490031689097727,2.665795738048055,3.592153051334208,3.1080185284412694,3.0789813111560704,3.778730805130344,4.27082762881039,4.437192323250032,4.516978113221872],
+    name: "Equivalent diameter (mm)",
+    marker: {color: 'rgb(255,255,255)'},
+    yaxis: 'y2',
+    type: 'histogram'
+    };
+    var trace4 = {
+    y: [3.2864052363068152,1.5977963680425276,1.338018455757206,1.6770602862461201,3.006222060466888,1.592035616826793,1.7093837459553076,2.045756011718494,4.098230674467194,1.626607739216918,2.157857624218058,2.0951105687542597,1.86117890755707,1.94064412817425,2.3314031324959084,2.5895077977382557,1.636081479081663,1.5691293193997713,2.040656448983855,1.5693243011564482,2.3263509309275925,1.3922453955251461,1.4809109865496495,1.9052757286187212,2.102324955701321,1.7848539991708965,3.3497500302647962,1.5170709859806109,1.4598185842342615,1.6301462414202914,2.044119334039354,1.5937192315273918,1.5377499558714982,2.533973269288213,2.231164319150769,2.366540581176091,2.267369270599172,3.0085437729783617,2.3259130271835535,1.3049737937953059,2.349858269564293,1.6985010911697482,2.1087068898839623,1.3229987535114363,3.4523087108382757,2.343195280076124,1.640486741838698,2.249243017123469,1.866274743001263,1.825889522684787,3.8603512061549283,1.5507672199655849,1.9193522038073334],
+    name: "Aspect ratio (-)",
+    marker: {color: 'rgb(255,255,255)'},
+    xaxis: 'x2',
+    type: 'histogram'
+    };
+    var data = [trace1, trace2, trace3, trace4];
+    var layout = {
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    showlegend: false,
+    autosize: true,
+    // width:  0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
+    // height: 0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
+    margin: {t: 0, r: 0, l:60, b:60},
+    hovermode: 'closest',
+    bargap: 0,
+    font: {
+        family: "Source Sans Pro,Helvetica,sans-serif",
+        size: 16,
+        color: '#FFF'
+    },
+    xaxis: {
+        domain: [0, 0.85],
+        showgrid: false,
+        zeroline: false,
+        title: "Equivalent diameter (mm)",
+        // range: [0,1]
+    },
+    yaxis: {
+        domain: [0, 0.85],
+        showgrid: false,
+        zeroline: false,
+        title: "Aspect ratio (-)",
+        // range: [0,1]
+    },
+    xaxis2: {
+        domain: [0.865, 1],
+        showgrid: false,
+        zeroline: false
+    },
+    yaxis2: {
+        domain: [0.865, 1],
+        showgrid: false,
+        zeroline: false
+    }
+    };
+    var config = {responsive: true}
+    Plotly.newPlot('2d_scatterplot_Hostun sand', data, layout, config);
+</script>
+				
+				
+				<p>
+				This data was originally reported in <a href="https://www.fake.link">this publication</a>.
+				You can find the  <a href="https://www.fake.link">original data here</a>. 
+				
+				For this sample we have the surfaces of 56 individual sand grains that you can <a href="https://www.fake.link">download here</a>.</p>
+
+				<!-- From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that Hostun sand has the following properties:
+				<ul>
+					<li>Size range: 0.1 mm to 1 mm</li>
+					<li>Mineralogy: Quartz</li>
+					<li>Angularity: Angular</li>
+				</ul> -->
+
+				<section id="video_gallery">
+    <div class="inner">
+        <h2>What the particles look like</h2>
+        <!-- 
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_1.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_2.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_3.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_4.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_5.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_6.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_7.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_8.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_9.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_10.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_11.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_12.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_13.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_14.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_15.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_16.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_17.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_18.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_19.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_20.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_21.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_22.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_23.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_24.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_25.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_26.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_27.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_28.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_29.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_30.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_31.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_32.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_33.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_34.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_35.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_36.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_37.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_38.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_39.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_40.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_41.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_42.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_43.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_44.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_45.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_46.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_47.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_48.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_49.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_50.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_51.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_52.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_53.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_54.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_55.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/hostun-sand/particle_56.webm"></video>
+         -->
+        <video class="gallery main" autoplay loop muted controls src="../../assets/sands/hostun-sand/all_particles.webm"></video>
+    </div>
+</section>
+
+				<p>
+					Source data: <a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
+					<br>
+					This derivative data: <a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
+				</p>
+
+			</div>
+
+		</section>
+
+		
+
+	</div>
+	
+	
+
+	<!-- Footer -->
+<footer id="footer">
+	<div class="inner">
+		<ul class="icons">
+			
+			
+			<li>
+				<a href="https://github.com/scigem" class="icon alt fa-github" target="_blank"
+					rel="noopener noreferrer" aria-label="GitHub">
+					<span class="label">GitHub</span>
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a href="https://twitter.com/scigem" class="icon alt fa-twitter" target="_blank"
+					rel="noopener noreferrer" aria-label="Twitter">
+					<span class="label">Twitter</span>
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+		</ul>
+		<ul class="copyright">
+			<li>&copy; The Sand Atlas </li>
+			<li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
+			<li>Jekyll integration: <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a></li>
+
+		</ul>
+	</div>
+</footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://sand-atlas.scigem.com/assets/js/jquery.min.js"></script>
+<script src="https://sand-atlas.scigem.com/assets/js/jquery.scrolly.min.js"></script>
+<script src="https://sand-atlas.scigem.com/assets/js/jquery.scrollex.min.js"></script>
+<script src="https://sand-atlas.scigem.com/assets/js/skel.min.js"></script>
+<script src="https://sand-atlas.scigem.com/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="https://sand-atlas.scigem.com/assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="https://sand-atlas.scigem.com/assets/js/main.js"></script>
+
+</body>
+
+</html>

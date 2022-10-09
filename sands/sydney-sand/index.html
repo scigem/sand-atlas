@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Sydney sand | The Sand Atlas</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+</head>
+
+
+<body>
+
+	<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Header -->
+	<header id="header" >
+		<a href="https://sand-atlas.scigem.com//" class="logo"><strong>The Sand Atlas</strong> <span></span></a>
+		<nav>
+			<a href="#menu">Menu</a>
+		</nav>
+	</header>
+
+	<!-- Menu -->
+	<nav id="menu">
+		<ul class="links">
+			
+			
+			
+			
+			
+			
+			
+			
+			<li><a href="https://sand-atlas.scigem.com//">Home</a></li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li><a href="https://sand-atlas.scigem.com/about.html">What is the Sand Atlas?</a></li>
+			
+			
+			
+			<li><a href="https://sand-atlas.scigem.com/all_sands.html">All sands</a></li>
+			
+			
+			
+			
+			
+			
+			
+			
+		</ul>
+		<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+	</nav>
+
+
+	<!-- Main -->
+	<div id="main" class="alt">
+
+		<!-- One -->
+		<section id="one">
+			<div class="inner">
+				<header class="major">
+					<h1>Sydney sand</h1>
+				</header>
+			<!-- </div> -->
+			<!-- <div class="inner"> -->
+			<!-- </section> -->
+				<div class="image right"><img src="/assets/images/gobi-desert-sand.jpg" alt=""
+						class="sand-thumbnail" /></div>
+				<iframe loading="lazy" allowfullscreen class="map right"
+					src="https://www.google.com/maps/embed/v1/view?zoom=15&center=-33.7964782,151.2846034&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>
+
+				<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+<section id="graphs">
+    <div class="inner">
+        <!-- <div > -->
+            <div class="graph right" id="2d_scatterplot_Sydney sand"></div>
+        <!-- </div> -->
+    </div>
+</section>
+
+<script>
+    // from https://plotly.com/javascript/2d-density-plots/
+    // console.log(document.getElementsByClassName("graph")[1].offsetWidth)
+    var trace1 = {
+    x: [],
+    y: [0.1,0.5,0.2,0.3,0.5,0.7,0.2,0.3,0.5,0.7],
+    mode: 'markers',
+    name: 'points',
+    marker: {
+        color: 'rgb(255,255,255)',
+        size: 5,
+        opacity: 1
+    },
+    type: 'scatter'
+    };
+    var trace2 = {
+    x: [],
+    y: [0.1,0.5,0.2,0.3,0.5,0.7,0.2,0.3,0.5,0.7],
+    name: 'density',
+    ncontours: 20,
+    colorscale: 'YlGnBu',
+    reversescale: true,
+    showscale: false,
+    type: 'histogram2dcontour',
+    };
+    var trace3 = {
+    x: [],
+    name: "Equivalent diameter (mm)",
+    marker: {color: 'rgb(255,255,255)'},
+    yaxis: 'y2',
+    type: 'histogram'
+    };
+    var trace4 = {
+    y: [0.1,0.5,0.2,0.3,0.5,0.7,0.2,0.3,0.5,0.7],
+    name: "Aspect ratio (-)",
+    marker: {color: 'rgb(255,255,255)'},
+    xaxis: 'x2',
+    type: 'histogram'
+    };
+    var data = [trace1, trace2, trace3, trace4];
+    var layout = {
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    showlegend: false,
+    autosize: true,
+    // width:  0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
+    // height: 0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
+    margin: {t: 0, r: 0, l:60, b:60},
+    hovermode: 'closest',
+    bargap: 0,
+    font: {
+        family: "Source Sans Pro,Helvetica,sans-serif",
+        size: 16,
+        color: '#FFF'
+    },
+    xaxis: {
+        domain: [0, 0.85],
+        showgrid: false,
+        zeroline: false,
+        title: "Equivalent diameter (mm)",
+        // range: [0,1]
+    },
+    yaxis: {
+        domain: [0, 0.85],
+        showgrid: false,
+        zeroline: false,
+        title: "Aspect ratio (-)",
+        // range: [0,1]
+    },
+    xaxis2: {
+        domain: [0.865, 1],
+        showgrid: false,
+        zeroline: false
+    },
+    yaxis2: {
+        domain: [0.865, 1],
+        showgrid: false,
+        zeroline: false
+    }
+    };
+    var config = {responsive: true}
+    Plotly.newPlot('2d_scatterplot_Sydney sand', data, layout, config);
+</script>
+				
+				
+				<p>
+				This data was originally reported in <a href="https://www.fake.link">this publication</a>.
+				You can find the  <a href="https://www.fake.link">original data here</a>. 
+				
+				For this sample we have the surfaces of 220 individual sand grains that you can <a href="https://www.fake.link">download here</a>.</p>
+
+				<!-- From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that Sydney sand has the following properties:
+				<ul>
+					<li>Size range: 0.1 mm to 1 mm</li>
+					<li>Mineralogy: Quartz</li>
+					<li>Angularity: Angular</li>
+				</ul> -->
+
+				<section id="video_gallery">
+    <div class="inner">
+        <h2>What the particles look like</h2>
+        <!-- 
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_1.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_2.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_3.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_4.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_5.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_6.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_7.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_8.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_9.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_10.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_11.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_12.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_13.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_14.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_15.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_16.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_17.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_18.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_19.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_20.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_21.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_22.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_23.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_24.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_25.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_26.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_27.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_28.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_29.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_30.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_31.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_32.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_33.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_34.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_35.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_36.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_37.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_38.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_39.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_40.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_41.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_42.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_43.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_44.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_45.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_46.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_47.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_48.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_49.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_50.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_51.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_52.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_53.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_54.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_55.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_56.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_57.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_58.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_59.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_60.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_61.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_62.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_63.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_64.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_65.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_66.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_67.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_68.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_69.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_70.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_71.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_72.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_73.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_74.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_75.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_76.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_77.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_78.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_79.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_80.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_81.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_82.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_83.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_84.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_85.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_86.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_87.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_88.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_89.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_90.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_91.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_92.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_93.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_94.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_95.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_96.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_97.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_98.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_99.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_100.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_101.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_102.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_103.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_104.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_105.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_106.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_107.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_108.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_109.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_110.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_111.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_112.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_113.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_114.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_115.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_116.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_117.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_118.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_119.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_120.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_121.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_122.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_123.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_124.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_125.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_126.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_127.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_128.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_129.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_130.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_131.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_132.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_133.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_134.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_135.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_136.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_137.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_138.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_139.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_140.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_141.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_142.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_143.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_144.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_145.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_146.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_147.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_148.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_149.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_150.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_151.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_152.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_153.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_154.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_155.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_156.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_157.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_158.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_159.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_160.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_161.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_162.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_163.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_164.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_165.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_166.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_167.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_168.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_169.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_170.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_171.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_172.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_173.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_174.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_175.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_176.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_177.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_178.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_179.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_180.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_181.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_182.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_183.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_184.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_185.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_186.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_187.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_188.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_189.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_190.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_191.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_192.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_193.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_194.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_195.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_196.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_197.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_198.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_199.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_200.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_201.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_202.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_203.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_204.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_205.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_206.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_207.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_208.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_209.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_210.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_211.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_212.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_213.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_214.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_215.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_216.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_217.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_218.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_219.webm"></video>
+        
+            <video class="gallery right" autoplay loop muted src="../../assets/sands/sydney-sand/particle_220.webm"></video>
+         -->
+        <video class="gallery main" autoplay loop muted controls src="../../assets/sands/sydney-sand/all_particles.webm"></video>
+    </div>
+</section>
+
+				<p>
+					Source data: <a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
+					<br>
+					This derivative data: <a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
+				</p>
+
+			</div>
+
+		</section>
+
+		
+
+	</div>
+	
+	
+
+	<!-- Footer -->
+<footer id="footer">
+	<div class="inner">
+		<ul class="icons">
+			
+			
+			<li>
+				<a href="https://github.com/scigem" class="icon alt fa-github" target="_blank"
+					rel="noopener noreferrer" aria-label="GitHub">
+					<span class="label">GitHub</span>
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a href="https://twitter.com/scigem" class="icon alt fa-twitter" target="_blank"
+					rel="noopener noreferrer" aria-label="Twitter">
+					<span class="label">Twitter</span>
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+		</ul>
+		<ul class="copyright">
+			<li>&copy; The Sand Atlas </li>
+			<li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
+			<li>Jekyll integration: <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a></li>
+
+		</ul>
+	</div>
+</footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://sand-atlas.scigem.com/assets/js/jquery.min.js"></script>
+<script src="https://sand-atlas.scigem.com/assets/js/jquery.scrolly.min.js"></script>
+<script src="https://sand-atlas.scigem.com/assets/js/jquery.scrollex.min.js"></script>
+<script src="https://sand-atlas.scigem.com/assets/js/skel.min.js"></script>
+<script src="https://sand-atlas.scigem.com/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="https://sand-atlas.scigem.com/assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="https://sand-atlas.scigem.com/assets/js/main.js"></script>
+
+</body>
+
+</html>
