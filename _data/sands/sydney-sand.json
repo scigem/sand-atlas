@@ -6,7 +6,7 @@
     "source_data_url": "https://www.fake.link",
     "publication_url": "https://www.fake.link",
     "download_url": "https://www.fake.link",
-    "license": "CC BY 4.0",
+    "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
     "size_range": "0.1 mm to 1 mm",
     "mineralogy": "Quartz",
     "angularity": "Angular",

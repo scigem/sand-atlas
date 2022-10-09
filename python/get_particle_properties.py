@@ -36,7 +36,7 @@ for i in tqdm.tqdm(range(1, len(files))):  # ASSUMING FIRST REGION IS THE BOUNDA
     axis_major_lengths[i-1] = regions[0]['axis_major_length']
     axis_minor_lengths[i-1] = regions[0]['axis_minor_length']
 
-
+jsonlike_print('number_of_particles', len(areas))
 jsonlike_print('area', areas*pixel_size**3)
 jsonlike_print('equivalent_diameter', eq_diams*pixel_size)
 jsonlike_print('axis_major_length', axis_major_lengths*pixel_size)
