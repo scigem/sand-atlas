@@ -31,7 +31,7 @@
 					src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.data.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>{%
 				endif %}
 
-				{% include 2d_scatterplot.html title=page.data.title x=page.data.equivalent_diameter y=page.data.aspect_ratio x_label='"Equivalent diameter (mm)"' y_label='"Aspect ratio (-)"' %}
+				{% include 2d_scatterplot.html title=page.data.title x=page.data.equivalent_diameter y=page.data.aspect_ratio id=page.data.id x_label='"Equivalent diameter (mm)"' y_label='"Aspect ratio (-)"' %}
 				{{ content }}
 				
 				<p>

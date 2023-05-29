@@ -11,41 +11,48 @@
 <script>
     // from https://plotly.com/javascript/2d-density-plots/
     // console.log(document.getElementsByClassName("graph")[1].offsetWidth)
+    console.log("HIIII");
+    // console.log({{include}})
+    console.log([{{include.id}}]);
+
     var trace1 = {
-    x: [{{ include.x }}],
-    y: [{{ include.y }}],
-    mode: 'markers',
-    name: 'points',
-    marker: {
-        color: 'rgb(255,255,255)',
-        size: 5,
-        opacity: 1
-    },
-    type: 'scatter'
+        x: [{{ include.x }}],
+        y: [{{ include.y }}],
+        ids: [{{ include.id }}],
+        hovertemplate: '%{id}',
+        mode: 'markers',
+        name: '',
+        marker: {
+            color: 'rgb(255,255,255)',
+            size: 5,
+            opacity: 1
+        },
+        type: 'scatter'
     };
     var trace2 = {
-    x: [{{ include.x }}],
-    y: [{{ include.y }}],
-    name: 'density',
-    ncontours: 20,
-    colorscale: 'YlGnBu',
-    reversescale: true,
-    showscale: false,
-    type: 'histogram2dcontour',
+        x: [{{ include.x }}],
+        y: [{{ include.y }}],
+        name: 'density',
+        hoverinfo:'skip',                                                                               
+        ncontours: 20,
+        colorscale: 'YlGnBu',
+        reversescale: true,
+        showscale: false,
+        type: 'histogram2dcontour',
     };
     var trace3 = {
-    x: [{{ include.x }}],
-    name: {{ include.x_label }},
-    marker: {color: 'rgb(255,255,255)'},
-    yaxis: 'y2',
-    type: 'histogram'
+        x: [{{ include.x }}],
+        name: {{ include.x_label }},
+        marker: {color: 'rgb(255,255,255)'},
+        yaxis: 'y2',
+        type: 'histogram'
     };
     var trace4 = {
-    y: [{{ include.y }}],
-    name: {{ include.y_label }},
-    marker: {color: 'rgb(255,255,255)'},
-    xaxis: 'x2',
-    type: 'histogram'
+        y: [{{ include.y }}],
+        name: {{ include.y_label }},
+        marker: {color: 'rgb(255,255,255)'},
+        xaxis: 'x2',
+        type: 'histogram'
     };
     var data = [trace1, trace2, trace3, trace4];
     var layout = {
