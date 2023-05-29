@@ -13,6 +13,6 @@ if not os.path.exists('SHAPE'):
     os.mkdir('SHAPE')
 
 for i, file in tqdm.tqdm(enumerate(files)):
-    data = numpy.load(file)
+    data = numpy.load(file, allow_pickle=True)
     this_particle = data["volume"]
     tifffile.imwrite(f'SHAPE/particle_{i}.tiff', this_particle.astype('uint8'))
