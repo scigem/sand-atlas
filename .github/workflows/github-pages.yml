@@ -13,6 +13,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.0' # Not needed with a .ruby-version file
+      - run: gem update --system
 
       # Use GitHub Actions' cache to shorten build times and decrease load on servers
       - uses: actions/cache@v3
