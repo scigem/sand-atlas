@@ -10,14 +10,18 @@ extension = filename.split('.')[-1]
 if not os.path.exists(filename[:-len(extension)-1]):
     os.mkdir(filename[:-len(extension)-1])
 
+print('Loading data... ', end='')
+
 if (extension.lower() == 'tif') or (extension.lower() == 'tiff'):
     labelled_data = tifffile.memmap(filename)
 elif (extension.lower() == 'raw'):
     shape = tuple(numpy.array(filename.split(
         '_')[-1][:-4].split('x'), dtype='int'))
     labelled_data = numpy.memmap(filename, shape=shape)
+elif ( extension.lower() == 'npz' ):
+    labelled_data = numpy.load(filename, allow_pickle=True)['arr_0']
 
-print('Loaded data')
+print('Done')
 
 num_particles = numpy.amax(labelled_data)
 print(f'Found {num_particles} labels')
@@ -46,7 +50,7 @@ for i in tqdm.tqdm(range(1, num_particles)):
             this_particle, level=0.95)
 
         # save everything to hard disk for this particle
-        outname = filename[:-len(extension)-1] + f'/particle_{j}.npz'
+        outname = filename[:-len(extension)-1] + f'/particle_{j:03}.npz'
         numpy.savez(outname, vertices=vertices,
                     faces=faces, volume=this_particle)
 

@@ -11,9 +11,9 @@
 <script>
     // from https://plotly.com/javascript/2d-density-plots/
     // console.log(document.getElementsByClassName("graph")[1].offsetWidth)
-    console.log("HIIII");
+    // console.log("HIIII");
     // console.log({{include}})
-    console.log([{{include.id}}]);
+    // console.log([{{include.id}}]);
 
     var trace1 = {
         x: [{{ include.x }}],
@@ -23,7 +23,7 @@
         mode: 'markers',
         name: '',
         marker: {
-            color: 'rgb(255,255,255)',
+            color: 'black',
             size: 5,
             opacity: 1
         },
@@ -39,6 +39,9 @@
         reversescale: true,
         showscale: false,
         type: 'histogram2dcontour',
+        line: {
+            width:0
+        }
     };
     var trace3 = {
         x: [{{ include.x }}],

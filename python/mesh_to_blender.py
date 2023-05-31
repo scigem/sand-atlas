@@ -56,7 +56,7 @@ bpy.ops.object.light_add(type='AREA',
 bpy.data.objects['Area'].data.energy = 10
 
 
-data = numpy.load(filename)
+data = numpy.load(filename, allow_pickle=True)
 
 edges = []
 new_mesh = bpy.data.meshes.new('mesh')

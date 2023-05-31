@@ -7,8 +7,13 @@ import tqdm
 
 def jsonlike_print(name, arr):
     print('"' + name + '": "', end='')
-    print(*arr.tolist(), sep=',', end='')
-    print('"')
+    if isinstance(arr, int):
+        print(arr, end='')
+    elif isinstance(arr, float):
+        print(arr, end='')
+    elif isinstance(arr, numpy.ndarray):
+        print(*arr.tolist(), sep=',', end='')
+    print('",')
 
 
 foldername = sys.argv[1]
@@ -26,7 +31,7 @@ for i in tqdm.tqdm(range(1, len(files))):  # ASSUMING FIRST REGION IS THE BOUNDA
     data = numpy.load(files[i])
     vol = data['volume'].astype('uint8')
 
-    regions = skimage.measure.regionprops(vol)
+    regions = skimage.measure.regionprops(vol,spacing=(pixel_size, pixel_size, pixel_size))
     # print(len(regions))
     # there should really only be one region...
 #     for j, region in enumerate(regions):
@@ -37,8 +42,9 @@ for i in tqdm.tqdm(range(1, len(files))):  # ASSUMING FIRST REGION IS THE BOUNDA
     axis_minor_lengths[i-1] = regions[0]['axis_minor_length']
 
 jsonlike_print('number_of_particles', len(areas))
-jsonlike_print('area', areas*pixel_size**3)
-jsonlike_print('equivalent_diameter', eq_diams*pixel_size)
-jsonlike_print('axis_major_length', axis_major_lengths*pixel_size)
-jsonlike_print('axis_minor_length', axis_minor_lengths*pixel_size)
+jsonlike_print('mm_per_pixel', pixel_size)
+jsonlike_print('area', areas)
+jsonlike_print('equivalent_diameter', eq_diams)
+jsonlike_print('axis_major_length', axis_major_lengths)
+jsonlike_print('axis_minor_length', axis_minor_lengths)
 jsonlike_print('aspect_ratio', axis_major_lengths/axis_minor_lengths)
