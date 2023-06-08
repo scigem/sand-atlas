@@ -66,6 +66,10 @@ new_mesh.update(calc_edges=True)
 # make object from mesh
 ob = bpy.data.objects.new('object', new_mesh)
 
+# bpy.context.view_layer.objects.active = bpy.data.objects["object"]
+# bpy.data.objects["object"].select_set(True)
+
+
 # shade smooth
 for poly in ob.data.polygons:
     poly.use_smooth = True
@@ -95,6 +99,15 @@ bpy.ops.object.origin_set(
      }, type='ORIGIN_GEOMETRY', center='MEDIAN'
 )
 ob.matrix_world.translation -= ob.location
+
+# Now lets fill in any holes in the mesh left from the marching cubes
+bpy.context.view_layer.objects.active = ob
+bpy.ops.object.editmode_toggle()
+# bpy.ops.mesh.fill()
+# bpy.ops.mesh.fill_holes()
+bpy.ops.mesh.fill_grid()
+bpy.ops.object.editmode_toggle()
+
 
 scene.render.filepath = filename[:-4] + '/frame_'  # save here
 bpy.ops.render.render(animation=True)
