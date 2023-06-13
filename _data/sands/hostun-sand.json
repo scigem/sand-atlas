@@ -3,6 +3,7 @@
     "description": "An angular quartz sand",
     "image": "assets/sands/hostun-sand/hostun-sand-FAKE.png",
     "lat_lon": "45.0384521,5.197219",
+    "vimeo_id" : 835386889,
     "source_data_url": "https://data.scigem-eng.sydney.edu.au/sand-atlas/hostun-labelled.tif",
     "publication_url": "https://iopscience.iop.org/article/10.1088/1361-6501/aa8dbf",
     "download_url": "https://data.scigem-eng.sydney.edu.au/sand-atlas/hostun-particles.zip",

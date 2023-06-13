@@ -3,6 +3,7 @@
     "description": "A natural silica sand",
     "image": "assets/sands/ottawa-sand/SEM-image-of-Ottawa-sand-F110-showing-the-shape-and-range-of-particle-size.png",
     "lat_lon": "45.1474069,-77.1199615",
+    "vimeo_id" : 835386889,
     "source_data_url": "https://data.scigem-eng.sydney.edu.au/sand-atlas/hostun-labelled.tif",
     "publication_url": "https://iopscience.iop.org/article/10.1088/1361-6501/aa8dbf",
     "download_url": "https://data.scigem-eng.sydney.edu.au/sand-atlas/hostun-particles.zip",
