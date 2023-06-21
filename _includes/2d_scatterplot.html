@@ -79,25 +79,30 @@
         zeroline: false,
         title: {{ include.x_label }},
         // range: [0,1]
+        // type: 'log'
     },
     yaxis: {
         domain: [0, 0.85],
         showgrid: false,
         zeroline: false,
         title: {{ include.y_label }},
+        // type: 'log'
         // range: [0,1]
     },
     xaxis2: {
         domain: [0.865, 1],
         showgrid: false,
-        zeroline: false
+        zeroline: false,
+        // type: 'log'
     },
     yaxis2: {
         domain: [0.865, 1],
         showgrid: false,
-        zeroline: false
+        zeroline: false,
+        // type: 'log'
     }
     };
     var config = {responsive: true}
     Plotly.newPlot('2d_scatterplot_{{ include.title }}', data, layout, config);
+
 </script>

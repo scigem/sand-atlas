@@ -47,3 +47,6 @@ defaults:
       type: pages  # select all category pages
     values:
       layout: sand
+
+# Google Analytics
+google_analytics: G-H3CZGKG5YZ

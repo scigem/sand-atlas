@@ -4,6 +4,8 @@ import numpy
 import skimage
 import tqdm
 import tifffile
+from stl import mesh
+
 
 filename = sys.argv[1]
 extension = filename.split('.')[-1]
@@ -59,6 +61,16 @@ for i in tqdm.tqdm(range(1, num_particles)):
             # now get meshed surface
             vertices, faces, normals, values = skimage.measure.marching_cubes(
                 this_particle, level=0.5)
+
+            # make an STL file
+            mesh_data = mesh.Mesh(numpy.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+            for i, f in enumerate(faces):
+                for j in range(3):
+                    mesh_data.vectors[i][j] = vertices[f[j]]
+
+            # if not os.path.exists(filename[:-len(extension)-1] + f'/stl/')
+            stlname = filename[:-len(extension)-1] + f'/stl/particle_{j:05}.stl'
+            mesh_data.save(stlname)
 
             # save everything to hard disk for this particle
             outname = filename[:-len(extension)-1] + f'/particle_{j:05}.npz'
