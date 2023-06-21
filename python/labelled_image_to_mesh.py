@@ -29,30 +29,41 @@ print(f'Found {num_particles} labels')
 props = skimage.measure.regionprops(labelled_data)
 print('Calculated region properties')
 
+# filter out small particles
+j = 0
+for i in tqdm.tqdm(range(1, num_particles)):
+    if props[i].area > 100:
+        j += 1
+
+print(f'Only {j} particles are larger than 100 voxels')
+
 nx, ny, nz = labelled_data.shape
 j = 0
 
 for i in tqdm.tqdm(range(1, num_particles)):
-    # print(i, props[i].label)
-    x_min, y_min, z_min, x_max, y_max, z_max = props[i].bbox
+    if props[i].area > 100:
+        # print(i, props[i].label)
+        x_min, y_min, z_min, x_max, y_max, z_max = props[i].bbox
 
-    if x_min == 0 or y_min == 0 or z_min == 0 or x_max == nx or y_max == ny or z_max == nz:
-        print(f'Particle {i} touching edge of the box, skipping')
-    else:
-        crop = labelled_data[x_min:x_max, y_min:y_max, z_min:z_max]
+        if x_min == 0 or y_min == 0 or z_min == 0 or x_max == nx or y_max == ny or z_max == nz:
+            print(f'Particle {i} touching edge of the box, skipping')
+        else:
+            crop = labelled_data[x_min:x_max, y_min:y_max, z_min:z_max]
 
-        this_particle = crop == props[i].label
+            this_particle = crop == props[i].label
 
-        # tifffile.imwrite(f'particle_{i}.tiff', this_particle.astype('uint8'))
+            this_particle = numpy.pad(this_particle, 1, mode='constant')
 
-        # now get meshed surface
-        vertices, faces, normals, values = skimage.measure.marching_cubes(
-            this_particle, level=0.95)
+            # tifffile.imwrite(f'particle_{i}.tiff', this_particle.astype('uint8'))
 
-        # save everything to hard disk for this particle
-        outname = filename[:-len(extension)-1] + f'/particle_{j:03}.npz'
-        numpy.savez(outname, vertices=vertices,
-                    faces=faces, volume=this_particle)
+            # now get meshed surface
+            vertices, faces, normals, values = skimage.measure.marching_cubes(
+                this_particle, level=0.5)
 
-        j += 1
+            # save everything to hard disk for this particle
+            outname = filename[:-len(extension)-1] + f'/particle_{j:05}.npz'
+            numpy.savez(outname, vertices=vertices,
+                        faces=faces, volume=this_particle)
+
+            j += 1
 print(f'{j} out of {num_particles} particles saved to disk')

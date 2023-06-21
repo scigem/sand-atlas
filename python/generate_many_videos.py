@@ -7,7 +7,8 @@ import matplotlib.image
 from tqdm import tqdm
 
 font = os.path.expanduser("~/Library/Fonts/Montserrat-Medium.ttf")
-debug = True
+# debug = True
+debug = False
 if debug:
     silence = ''
 else:
@@ -24,7 +25,7 @@ if not os.path.exists('blank.webm'):
 
 # Step 1: convert labelled image to a set of meshes
 print('Converting labelled image to meshes...')
-if os.path.exists(foldername + '/particle_000.npz'):
+if os.path.exists(foldername + '/particle_00000.npz'):
     print('    Meshes already exist, skipping step 1')
 else:
     os.system('python labelled_image_to_mesh.py ' + filename)
@@ -40,13 +41,14 @@ ids = json_data['id'].replace("'",'').split(', ')
 for i,file in tqdm(enumerate(files), total=len(files)):
     if not os.path.exists(file[:-4] + ".webm"):
         # Use blender to render an animation of this grain rotating
-        os.system('/Applications/Blender.app/Contents/MacOS/Blender --background --python mesh_to_blender.py -- ' + file + " > /dev/null 2>&1")
+        os.system('/Applications/Blender.app/Contents/MacOS/Blender --background -t 4 --python mesh_to_blender.py -- ' + file + " > /dev/null 2>&1")
         # Use ffmpeg to convert the animation into a webm video
         os.system("ffmpeg -y -framerate 30 -pattern_type glob -i '" + file[:-4] + "/*.png' " +  '-c:v libvpx-vp9 ' +
                 '-vf "drawtext=text='+ids[i]+f':x=(w-tw)/2:y=h-th-10:fontcolor=white:fontsize=72:fontfile={font}" ' +
                 file[:-4] + ".webm" + silence)
         # Clean up the rendered images
         os.system('rm -rf ' + file[:-4] + '/*.png')
+        os.system('rmdir ' + file[:-4])
 
 # Step 3: Stitch videos together into a grid
 print('Stitching videos together...')
