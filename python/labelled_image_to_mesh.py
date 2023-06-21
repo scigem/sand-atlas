@@ -65,8 +65,8 @@ for i in tqdm.tqdm(range(1, num_particles)):
             # make an STL file
             mesh_data = mesh.Mesh(numpy.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
             for i, f in enumerate(faces):
-                for j in range(3):
-                    mesh_data.vectors[i][j] = vertices[f[j]]
+                for k in range(3):
+                    mesh_data.vectors[i][k] = vertices[f[k]]
 
             # if not os.path.exists(filename[:-len(extension)-1] + f'/stl/')
             stlname = filename[:-len(extension)-1] + f'/stl/particle_{j:05}.stl'
