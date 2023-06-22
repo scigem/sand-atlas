@@ -6,8 +6,26 @@ import tqdm
 import tifffile
 from stl import mesh
 
+def write_poly(vertices, faces, filename):
+    # Save the mesh to a POLY file
+    with open(filename, 'w') as f:
+        # Write the vertices
+        f.write('POINTS\n')
+        for i, vertex in enumerate(vertices):
+            f.write(f'{i+1}: {vertex[0]} {vertex[1]} {vertex[2]}\n')
+
+        # Write the faces
+        f.write('POLYS\n')
+        for i, face in enumerate(faces):
+            f.write(f'{i+1}: {face[0]+1} {face[1]+1} {face[2]+1}\n')
+
+        f.write('END')
 
 filename = sys.argv[1]
+
+make_stl = False
+make_poly = True
+
 extension = filename.split('.')[-1]
 if not os.path.exists(filename[:-len(extension)-1]):
     os.mkdir(filename[:-len(extension)-1])
@@ -63,14 +81,22 @@ for i in tqdm.tqdm(range(1, num_particles)):
                 this_particle, level=0.5)
 
             # make an STL file
-            mesh_data = mesh.Mesh(numpy.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
-            for i, f in enumerate(faces):
-                for k in range(3):
-                    mesh_data.vectors[i][k] = vertices[f[k]]
+            if make_stl:
+                mesh_data = mesh.Mesh(numpy.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+                for id, f in enumerate(faces):
+                    for k in range(3):
+                        mesh_data.vectors[id][k] = vertices[f[k]]
 
-            # if not os.path.exists(filename[:-len(extension)-1] + f'/stl/')
-            stlname = filename[:-len(extension)-1] + f'/stl/particle_{j:05}.stl'
-            mesh_data.save(stlname)
+                if not os.path.exists(filename[:-len(extension)-1] + f'/stl/'):
+                    os.mkdir(filename[:-len(extension)-1] + f'/stl/')
+                stlname = filename[:-len(extension)-1] + f'/stl/particle_{j:05}.stl'
+                mesh_data.save(stlname)
+
+            if make_poly:
+                if not os.path.exists(filename[:-len(extension)-1] + f'/poly/'):
+                    os.mkdir(filename[:-len(extension)-1] + f'/poly/')
+                polyname = filename[:-len(extension)-1] + f'/poly/particle_{j:05}.poly'
+                write_poly(vertices, faces, polyname)                
 
             # save everything to hard disk for this particle
             outname = filename[:-len(extension)-1] + f'/particle_{j:05}.npz'
