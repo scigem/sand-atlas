@@ -17,15 +17,15 @@ The scripts to convert a user submitted labelled `tiff` file are stored in the `
 ## User submissions
 When someone wants to give us data, they start off with either a direct email or by filling out the web form on the homepage of the Sand Atlas. From there:
 1. We send a [FileSender](https://filesender.aarnet.edu.au/) link to them requesting the upload of raw and labelled tiffs. We also ask for as much as possible of the following information:
-  1. Title
-  2. Short description
-  3. Photo of the sand
-  4. Latitude and longitude of source location
-  5. Source data URL (if already hosted somewhere)
-  6. Publication URL (if already published somewhere)
-  7. Source license (if source data already licensed). If not previously licensed, we recommend [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  8. Mineralogy
-  9. Resolution (mm per voxel)
+    1. Title
+    2. Short description
+    3. Photo of the sand
+    4. Latitude and longitude of source location
+    5. Source data URL (if already hosted somewhere)
+    6. Publication URL (if already published somewhere)
+    7. Source license (if source data already licensed). If not previously licensed, we recommend [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+    8. Mineralogy
+    9. Resolution (mm per voxel)
 10. Once received, we download the tiffs
 11. Convert labelled image to meshes
 12. Use blender to render each mesh to a video
