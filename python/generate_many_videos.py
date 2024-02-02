@@ -63,11 +63,11 @@ print(f'    Making {num_grids} grids')
 for i in range(num_grids):
     # Make a 4x3 grid
     if not os.path.exists(f'grid_{i}.webm'):
-        print(f'ffmpeg -y -i {files[i*12+0]} -i {files[i*12+1]} -i {files[i*12+ 2]} -i {files[i*12+ 3]} ' +
-                f'-i {files[i*12+4]} -i {files[i*12+5]} -i {files[i*12+ 6]} -i {files[i*12+ 7]} ' + 
-                f'-i {files[i*12+8]} -i {files[i*12+9]} -i {files[i*12+10]} -i {files[i*12+11]} ' +
-                f'-filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v][6:v][7:v][8:v][9:v][10:v][11:v]xstack=inputs=12:layout=0_0|w0_0|w0+w1_0|w0+w1+w2_0|0_h0|w4_h0|w4+w5_h0|w4+w5+w6_h0|0_h0+h4|w8_h0+h4|w8+w9_h0+h4|w8+w9+w10_h0+h4" ' +
-                f'grid_{i}.webm' + silence)
+        # print(f'ffmpeg -y -i {files[i*12+0]} -i {files[i*12+1]} -i {files[i*12+ 2]} -i {files[i*12+ 3]} ' +
+        #         f'-i {files[i*12+4]} -i {files[i*12+5]} -i {files[i*12+ 6]} -i {files[i*12+ 7]} ' + 
+        #         f'-i {files[i*12+8]} -i {files[i*12+9]} -i {files[i*12+10]} -i {files[i*12+11]} ' +
+        #         f'-filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v][6:v][7:v][8:v][9:v][10:v][11:v]xstack=inputs=12:layout=0_0|w0_0|w0+w1_0|w0+w1+w2_0|0_h0|w4_h0|w4+w5_h0|w4+w5+w6_h0|0_h0+h4|w8_h0+h4|w8+w9_h0+h4|w8+w9+w10_h0+h4" ' +
+        #         f'grid_{i}.webm' + silence)
         os.system(f'ffmpeg -y -i {files[i*12+0]} -i {files[i*12+1]} -i {files[i*12+ 2]} -i {files[i*12+ 3]} ' +
                 f'-i {files[i*12+4]} -i {files[i*12+5]} -i {files[i*12+ 6]} -i {files[i*12+ 7]} ' + 
                 f'-i {files[i*12+8]} -i {files[i*12+9]} -i {files[i*12+10]} -i {files[i*12+11]} ' +
@@ -84,8 +84,8 @@ os.system("ffmpeg -y -f concat -safe 0 -i sources.txt -c copy all_particles.webm
 # Step 4: Cleanup
 print('Cleaning up...')
 if not debug: os.system("rm grid_*.webm")
-# Reduce file size if necessary
-# os.system("ffmpeg -i all_particles.webm -crf 28 all_particles_smaller.mp4")
+# # Reduce file size if necessary
+# # os.system("ffmpeg -i all_particles.webm -crf 28 all_particles_smaller.mp4")
 os.system("ffmpeg -y -i all_particles.webm -crf 45 all_particles_smaller.webm" + silence)
-os.system(
-    f"mv all_particles_smaller.webm ~/code/sand-atlas/assets/sands/{sand_type}-sand/all_particles.webm")
+# os.system(
+#     f"mv all_particles_smaller.webm ~/code/sand-atlas/assets/sands/{sand_type}-sand/all_particles.webm")
