@@ -1,0 +1,116 @@
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<style>
+    #cesiumContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60vh;
+        margin-bottom: -3.25em;
+        max-height: 32em;
+        min-height: 22em;
+        top: -3.25em;
+        z-index: 0; /* Ensure the Cesium container is behind other content */
+        pointer-events: auto;
+    }
+
+    .cesium-infoBox {
+        top: 150px;
+        z-index : 20;
+    }
+
+</style>
+
+<section class="major">
+    <div id="cesiumContainer" class="fullSize"></div>
+    <div id="hiddenCreditContainer" style="display:none;"></div>
+    <!-- <div id="popup" class="cesium-popup" style="display: none;">Hello, this is a popup!</div> -->
+    <div class="inner">
+        <header class="major">
+            <h1 style="position:relative">{{ page.landing-title }}</h1>
+        </header>
+        <div class="content">
+            <p style="text-transform: uppercase; position:relative">{{ site.description }}</p>
+            <ul class="actions">
+                <li><a href="#one" class="button next scrolly">Get Started</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjNDExZDA4Zi00ZDcxLTQyYzMtYjMxMS0yMmJmNDE5YmMzYWEiLCJpZCI6MjI5MzY4LCJpYXQiOjE3MjEzNjE3MTh9.GY08Rq4a9hbVZC17lexKBTAVYL6d5gKQ796ncIREr6M';
+
+    // const viewer = new Cesium.CesiumWidget("cesiumContainer", {
+    const viewer = new Cesium.Viewer("cesiumContainer", {
+        baseLayer: Cesium.ImageryLayer.fromProviderAsync(
+            Cesium.TileMapServiceImageryProvider.fromUrl(
+                Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII")
+            )
+        ),
+        animation: false,
+        baseLayerPicker: false,
+        fullscreenButton: false,
+        vrButton: false,
+        geocoder: false,
+        homeButton: false,
+        infoBox: true,  // We need the infoBox for popups
+        sceneModePicker: false,
+        selectionIndicator: true,
+        timeline: false,
+        navigationHelpButton: false,
+        navigationInstructionsInitiallyVisible: false,
+        scene3DOnly: true,
+        creditContainer: 'hiddenCreditContainer'
+    });
+
+    // Add several billboards based on the above image in the atlas.
+    {% for page in site.pages %}
+          {% assign path = page.dir | slice: 1, 5 %}
+          {% if path == 'sands' %}
+            {% if page.title != 404 %}
+                {% if page.data.lat_lon %}
+                (function() {
+                    // Split the string into an array
+                    let parts = '{{ page.data.lat_lon }}'.split(",");
+
+                    // Reverse the array to get [lat, lon]
+                    let reversedParts = [parseFloat(parts[1]), parseFloat(parts[0])];
+
+                    // Extract the latitude and longitude
+                    let lon = reversedParts[0];
+                    let lat = reversedParts[1];
+                    console.log("Adding billboard for {{ page.title }} at lat: " + lat + ", lon: " + lon);
+                    viewer.entities.add({
+                        position: Cesium.Cartesian3.fromDegrees(lon, lat),
+                        billboard: {
+                            image: "/assets/images/pin.svg",
+                        },
+                        name: '{{ page.title }}',
+                        description: '{{ page.description }}'
+                    });
+                })();
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    // Set up the clock to simulate time progression
+    var clock = viewer.clock;
+    clock.shouldAnimate = true; // Ensure the clock is animating
+    clock.multiplier = 3600; // Set the clock speed to simulate a faster rotation (3600x real time)
+
+    // Rotate the globe by updating the scene's preRender event
+    viewer.scene.preRender.addEventListener(function (scene, time) {
+        var icrfToFixed = Cesium.Transforms.computeIcrfToFixedMatrix(time);
+        if (Cesium.defined(icrfToFixed)) {
+            var camera = viewer.camera;
+            var offset = Cesium.Cartesian3.clone(camera.position);
+            var transform = Cesium.Matrix4.fromRotationTranslation(icrfToFixed);
+            camera.lookAtTransform(transform, offset);
+        }
+    });
+
+</script>
