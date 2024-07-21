@@ -11,21 +11,30 @@
         max-height: 32em;
         min-height: 22em;
         top: -3.25em;
-        z-index: 0; /* Ensure the Cesium container is behind other content */
+        z-index: 0;
+        /* Ensure the Cesium container is behind other content */
         pointer-events: auto;
     }
 
     .cesium-infoBox {
         top: 150px;
-        z-index : 20;
+        z-index: 20;
     }
-    .unselectable {
-            user-select: none; /* Standard syntax */
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-        }
 
+    .unselectable {
+        user-select: none;
+        /* Standard syntax */
+        -webkit-user-select: none;
+        /* Safari */
+        -moz-user-select: none;
+        /* Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+    }
+
+    !button.cesium-infoBox-camera {
+        display: none;
+    }
 </style>
 
 <section class="major">
@@ -74,33 +83,33 @@
 
     // Add several billboards based on the above image in the atlas.
     {% for page in site.pages %}
-          {% assign path = page.dir | slice: 1, 5 %}
-          {% if path == 'sands' %}
-            {% if page.title != 404 %}
-                {% if page.data.lat_lon %}
-                (function() {
-                    // Split the string into an array
-                    let parts = '{{ page.data.lat_lon }}'.split(",");
+    {% assign path = page.dir | slice: 1, 5 %}
+    {% if path == 'sands' %}
+    {% if page.title != 404 %}
+    {% if page.data.lat_lon %}
+    (function () {
+        // Split the string into an array
+        let parts = '{{ page.data.lat_lon }}'.split(",");
 
-                    // Reverse the array to get [lat, lon]
-                    let reversedParts = [parseFloat(parts[1]), parseFloat(parts[0])];
+        // Reverse the array to get [lat, lon]
+        let reversedParts = [parseFloat(parts[1]), parseFloat(parts[0])];
 
-                    // Extract the latitude and longitude
-                    let lon = reversedParts[0];
-                    let lat = reversedParts[1];
-                    console.log("Adding billboard for {{ page.title }} at lat: " + lat + ", lon: " + lon);
-                    viewer.entities.add({
-                        position: Cesium.Cartesian3.fromDegrees(lon, lat),
-                        billboard: {
-                            image: "/assets/images/pin.svg",
-                        },
-                        name: '{{ page.title }}',
-                        description: '{{ page.description }}'
-                    });
-                })();
-                {% endif %}
-            {% endif %}
-        {% endif %}
+        // Extract the latitude and longitude
+        let lon = reversedParts[0];
+        let lat = reversedParts[1];
+        console.log("Adding billboard for {{ page.title }} at lat: " + lat + ", lon: " + lon);
+        viewer.entities.add({
+            position: Cesium.Cartesian3.fromDegrees(lon, lat),
+            billboard: {
+                image: "/assets/images/pin.svg",
+            },
+            name: '{{ page.title }}',
+            description: '<a href="{{ page.dir }}" target="_blank">{{ page.description }}</a>'
+        });
+    })();
+    {% endif %}
+    {% endif %}
+    {% endif %}
     {% endfor %}
 
     // Set up the clock to simulate time progression
