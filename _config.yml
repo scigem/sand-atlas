@@ -1,7 +1,7 @@
 # site settings
 title: The Sand Atlas
 email: benjy.marks@sydney.edu.au
-description: 3D scans of lots of sand grains.
+description: 3D models of lots of particles.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: https://sand-atlas.scigem.com # the base hostname & protocol for your site
 author: Benjy Marks
