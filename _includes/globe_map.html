@@ -1,5 +1,8 @@
 <script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
 <link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<!-- <script src="node_modules/cesium/Build/Cesium/Cesium.js"></script>
+<link href="node_modules/cesium/Build/Cesium/Widgets/widgets.css" rel="stylesheet"> -->
+
 <style>
     #cesiumContainer {
         position: absolute;
@@ -120,7 +123,7 @@
     // Set up the clock to simulate time progression
     var clock = viewer.clock;
     clock.shouldAnimate = true; // Ensure the clock is animating
-    clock.multiplier = 3600; // Set the clock speed to simulate a faster rotation (3600x real time)
+    clock.multiplier = 1000; // Set the clock speed to simulate a faster rotation (3600x real time)
 
     // Rotate the globe by updating the scene's preRender event
     viewer.scene.preRender.addEventListener(function (scene, time) {

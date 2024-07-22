@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="importmap">
+            {
+              "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/"
+              }
+            }
+          </script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script> -->
+    <style>
+        /* body {
+            margin: 0;
+        } */
+        #stl-viewer {
+            max-width: 31%;
+            /* width: 30%; */
+            /* height: 300px; */
+            /* display: inline-block; */
+            /* overflow: hidden; */
+            /* position: relative; */
+        }
+    </style>
+</head>
+
+<body>
+    <script type="module">
+        import * as THREE from 'three';
+
+        import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        let camera, cameraTarget, scene, renderer, controls;
+
+        // const container = document.createElement('div');
+        const container = document.getElementById('stl-viewer');
+        // container.id = 'stl-viewer';
+        // console.log(container.clientWidth)
+        // document.body.appendChild(container);
+
+        init();
+
+        function getWorldBoundingBox(object) {
+            // Ensure the object's geometry has a bounding box computed
+            object.geometry.computeBoundingBox();
+
+            // Create a Box3 instance and set it to the object's local bounding box
+            const boundingBox = new THREE.Box3().setFromObject(object);
+
+            // Apply the object's world matrix to the bounding box
+            boundingBox.applyMatrix4(object.matrixWorld);
+
+            return boundingBox;
+        }
+
+        function init() {
+
+            camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.001, 2);
+            camera.position.set(-2, 0, 0);
+
+            cameraTarget = new THREE.Vector3(0, 0, 0);
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x161616);
+            scene.add(new THREE.AmbientLight(0xFFFFFF));
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setAnimationLoop(animate);
+            
+            
+            container.appendChild(renderer.domElement);
+
+            // lighting
+            const light = new THREE.DirectionalLight(0xffffff, 10);
+            light.position.set(1, 1, 1).normalize();
+            scene.add(light);
+            
+            controls = new OrbitControls(camera, container);
+            controls.minDistance = 1;
+            controls.maxDistance = 2;
+            // controls.addEventListener('change', render);
+
+            
+            
+            window.addEventListener('resize', onWindowResize);
+            console.log('{{page.dir}}')
+            const loader = new STLLoader();
+            loader.load('https://data.scigem-eng.sydney.edu.au/sand-atlas{{ page.dir }}ref_particle.stl', function (geometry) {
+
+                const material = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, roughness: 0.5, metalness: 0.5 });
+                material.shading = THREE.FlatShading;
+                const mesh = new THREE.Mesh(geometry, material);
+
+                // Calculate bounding box and scale the mesh
+                const boundingBox = getWorldBoundingBox(mesh);
+                const size = boundingBox.getSize(new THREE.Vector3());
+                const maxDimension = Math.max(size.x, size.y, size.z);
+                const scale = 1 / maxDimension;
+                mesh.scale.set(scale, scale, scale);
+
+                // Optionally, center the mesh
+                const center = boundingBox.getCenter(new THREE.Vector3());
+                mesh.position.sub(center.multiplyScalar(scale));
+
+                scene.add(mesh);
+
+            });
+
+            
+
+        }
+
+
+        function onWindowResize() {
+
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(container.clientWidth, container.clientHeight);
+
+        }
+
+        function animate() {
+
+            render();
+
+        }
+
+        function render() {
+
+            // const timer = Date.now() * 0.0005;
+
+            // camera.position.x = Math.cos(timer) * 3;
+            // camera.position.z = Math.sin(timer) * 3;
+
+            // camera.lookAt(cameraTarget);
+
+            renderer.render(scene, camera);
+            controls.update();
+
+        }
+
+    </script>
+</body>
+
+</html>
