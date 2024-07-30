@@ -1,5 +1,7 @@
 # The Sand Atlas
 
+**Important**: This repository contains only the material used to produce The Sand Atlas website. On [the website](https://sand-atlas.scigem.com/) you can navigate to the page for the sand you are interested in and download the particle data from there.
+
 [See it live here](https://sand-atlas.scigem.com/)
 
 # Installation
