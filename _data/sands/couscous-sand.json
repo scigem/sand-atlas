@@ -6,7 +6,6 @@
     "image": "assets/sands/couscous-sand/couscous.png",
     "source_data_url": "https://data.scigem-eng.sydney.edu.au/sand-atlas/sands/couscous_labelled.tif",
     "publication_url": "https://pubs.rsc.org/en/content/articlehtml/2022/sm/d2sm00322h",
-    "download_url": "https://data.scigem-eng.sydney.edu.au/sand-atlas/sands/couscous-meshes.zip",
     "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
     "number_of_particles": "2230",
     "mm_per_pixel": "0.0280218",

@@ -56,9 +56,8 @@
 				href="{{ page.data.publication_url }}">this publication</a>.{% endif %}
 			{% if page.data.source_data_url %}You can find the <a href="{{ page.data.source_data_url }}">original data
 				here</a>. {% endif %}
-			For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a
-			voxel size of {{page.data.mm_per_pixel}} mm that you can <a href="{{ page.data.download_url }}">download
-				here</a>.
+			For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.mm_per_pixel}} mm. <!-- that you can <a href="{{ page.data.download_url }}">download here</a>. -->
+				{% include dropdown.html sand=page.dir %}
 		</p>
 	</div>
 

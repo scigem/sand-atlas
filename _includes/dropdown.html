@@ -1,0 +1,98 @@
+<style>
+    /* Dropdown Button */
+    .dropbtn {
+        /* background-color: #3498DB; */
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Dropdown button on hover & focus */
+    .dropbtn:hover,
+    .dropbtn:focus {
+        /* background-color: #2980B9; */
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+        display: block;
+    }
+</style>
+
+<script>
+    /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+<div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">Download particles here</button>
+    <div id="myDropdown" class="dropdown-content">
+        <!-- <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}YADE_surface_mesh_high.stl">YADE Surface Mesh (High quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}YADE_surface_mesh_medium.stl">YADE Surface Mesh (Medium quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}YADE_surface_mesh_low.stl">YADE Surface Mesh (Low quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}YADE_level_set_high.stl">YADE Level Set (High quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}YADE_level_set_medium.stl">YADE Level Set (Medium quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}YADE_level_set_low.stl">YADE Level Set (Low quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}MercuryDPM_surface_mesh_high.stl">MercuryDPM Surface Mesh (High quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}MercuryDPM_surface_mesh_medium.stl">MercuryDPM Surface Mesh (Medium quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}MercuryDPM_surface_mesh_low.stl">MercuryDPM Surface Mesh (Low quality)</a> -->
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}surface_mesh_high.zip">Surface Mesh (High quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}surface_mesh_medium.zip">Surface Mesh (Medium quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}surface_mesh_low.zip">Surface Mesh (Low quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}level_set_high.zip">Level Set (High quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}level_set_medium.zip">Level Set (Medium quality)</a>
+        <a href="https://data.scigem-eng.sydney.edu.au/sand-atlas{{ include.sand }}level_set_low.zip">Level Set (Low quality)</a>
+    </div>
+</div>
