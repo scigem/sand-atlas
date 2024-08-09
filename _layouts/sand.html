@@ -59,6 +59,13 @@
 			For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.mm_per_pixel}} mm. <!-- that you can <a href="{{ page.data.download_url }}">download here</a>. -->
 				{% include dropdown.html sand=page.dir %}
 		</p>
+		<p>
+			{% if page.data.source_license %}Source data is licensed under: {{ page.data.source_license }}{% endif %}
+			<br>
+			This derivative data is licensed under: <a href='https://creativecommons.org/licenses/by/4.0/'><img
+					src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
+			{% if page.data.contributor %}<br>Contributor: {{ page.data.contributor }}{% endif %}
+		</p>
 	</div>
 
 		<!-- From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that {{ page.data.title }} has the following properties:
@@ -71,13 +78,7 @@
 		{% include video_gallery.html title=page.dir number_of_particles=page.data.number_of_particles
 		video_id=page.data.vimeo_id%}
 
-		<p>
-			{% if page.data.source_license %}Source data is licensed under: {{ page.data.source_license }}{% endif %}
-			<br>
-			This derivative data is licensed under: <a href='https://creativecommons.org/licenses/by/4.0/'><img
-					src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
-			{% if page.data.contributor %}<br>Contributor: {{ page.data.contributor }}{% endif %}
-		</p>
+		
 
 	</div>
 
