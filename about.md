@@ -14,15 +14,16 @@ For all images, the original source data is a micro-CT scan of an assembly of pa
 
 This community effort is run by:
 
-- [Benjy Marks](www.benjymarks.com)
-- Baozhong Chen
 - [Edward Andò](https://people.epfl.ch/edward.ando?lang=en)
-- [Max Wiebicke](https://scholar.google.com/citations?user=h-57EAgAAAAJ)
 - [Giulia Guida](https://people.utwente.nl/g.guida)
-- [Erika Tudisco](https://portal.research.lu.se/en/persons/erika-tudisco)
+- [Benjy Marks](www.benjymarks.com)
 - [Mohammad Saadatfar](https://www.sydney.edu.au/engineering/about/our-people/academic-staff/mohammad-saadatfar.html)
+- [Erika Tudisco](https://portal.research.lu.se/en/persons/erika-tudisco)
 - [Ilija Vego](https://orcid.org/0000-0003-4426-3382)
+- [Max Wiebicke](https://scholar.google.com/citations?user=h-57EAgAAAAJ)
 
 # Developers
 
-The website and processing pipeline is maintained by [Benjy Marks](www.benjymarks.com) and [Ilija Vego](https://orcid.org/0000-0003-4426-3382).
+The website and processing pipeline is maintained by:
+- [Benjy Marks](www.benjymarks.com)
+- [Ilija Vego](https://orcid.org/0000-0003-4426-3382)
