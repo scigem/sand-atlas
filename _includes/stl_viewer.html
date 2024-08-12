@@ -104,10 +104,10 @@
                 });
 
             });
-            document.body.appendChild(gui.domElement); // Ensure it's appended to the body
-            gui.domElement.style.position = 'absolute'; // Make sure it's not affected by layout flow
-            gui.domElement.style.top = '10px'; // Adjust positioning as necessary
-            gui.domElement.style.right = '10px'; // Position it in a visible area
+            container.appendChild(gui.domElement); // Ensure it's appended to the body
+            gui.domElement.style.position = 'relative'; // Make sure it's not affected by layout flow
+            gui.domElement.style.top = '-100px'; // Adjust positioning as necessary
+            // gui.domElement.style.right = '10px'; // Position it in a visible area
             gui.domElement.style.zIndex = '1000'; // Ensure it's on top of other elements
 
             window.addEventListener('resize', onWindowResize);
