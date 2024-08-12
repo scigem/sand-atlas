@@ -57,25 +57,25 @@ volume_to_mesh_modifier.threshold = (
     0.5  # Set the threshold for the volume to mesh conversion
 )
 
-for quality in ["LOW", "MEDIUM", "HIGH"]:
+for quality in ["HIGH", "MEDIUM", "LOW", "VERY_LOW"]:
     if quality == "HIGH":
         # Adjust the voxel size for fineness
         volume_to_mesh_modifier.voxel_size = 1.0
         # Set adaptivity to control mesh simplification
         volume_to_mesh_modifier.adaptivity = 0.0
     elif quality == "MEDIUM":
-        # Adjust the voxel size for medium quality
-        volume_to_mesh_modifier.voxel_size = 2.0
-        # Set adaptivity to control mesh simplification
-        volume_to_mesh_modifier.adaptivity = 0.0
-    elif quality == "LOW":
         # Adjust the voxel size for speed
         volume_to_mesh_modifier.voxel_size = 1.0
         # Set adaptivity to control mesh simplification
         volume_to_mesh_modifier.adaptivity = 1.0
+    elif quality == "LOW":
+        mesh_obj = bpy.context.active_object
+        remesh_modifier = mesh_obj.modifiers.new(name="Remesh", type="REMESH")
+        remesh_modifier.mode = "VOXEL"
+        remesh_modifier.voxel_size = 10
 
-    # Apply the modifier to convert the volume to a mesh
-    # bpy.ops.object.modifier_apply(modifier="VolumeToMesh")
+    elif quality == "VERY_LOW":
+        remesh_modifier.voxel_size = 100
 
     # The volume is now a mesh object
     mesh_obj = bpy.context.active_object

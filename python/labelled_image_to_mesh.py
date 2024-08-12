@@ -38,16 +38,9 @@ extension = filename.split(".")[-1]
 if not os.path.exists(filename[: -len(extension) - 1]):
     os.mkdir(filename[: -len(extension) - 1])
 
-if not os.path.exists(filename[: -len(extension) - 1] + "/npy/"):
-    os.mkdir(filename[: -len(extension) - 1] + "/npy/")
-if not os.path.exists(filename[: -len(extension) - 1] + "/stl_LOW/"):
-    os.mkdir(filename[: -len(extension) - 1] + "/stl_LOW/")
-if not os.path.exists(filename[: -len(extension) - 1] + "/stl_MEDIUM/"):
-    os.mkdir(filename[: -len(extension) - 1] + "/stl_MEDIUM/")
-if not os.path.exists(filename[: -len(extension) - 1] + "/stl_HIGH/"):
-    os.mkdir(filename[: -len(extension) - 1] + "/stl_HIGH/")
-if not os.path.exists(filename[: -len(extension) - 1] + "/vdb/"):
-    os.mkdir(filename[: -len(extension) - 1] + "/vdb/")
+for subfolder in ["npy", "stl_VERY_LOW", "stl_LOW", "stl_MEDIUM", "stl_HIGH", "vdb"]:
+    if not os.path.exists(filename[: -len(extension) - 1] + f"/{subfolder}/"):
+        os.mkdir(filename[: -len(extension) - 1] + f"/{subfolder}/")
 
 
 print("Loading data... ", end="")

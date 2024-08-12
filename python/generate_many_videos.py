@@ -111,6 +111,7 @@ print("    Making zips...")
 os.system("zip upload/meshes_high.zip " + foldername + "/stl_HIGH/*.stl")
 os.system("zip upload/meshes_medium.zip " + foldername + "/stl_MEDIUM/*.stl")
 os.system("zip upload/meshes_low.zip " + foldername + "/stl_LOW/*.stl")
+os.system("zip upload/meshes_very_low.zip " + foldername + "/stl_VERY_LOW/*.stl")
 os.system("zip upload/level_sets.zip " + foldername + "/vdb/*.vdb")
 os.system(f"cp {foldername}/stl_HIGH/00000.stl upload/ref_particle.stl")
 
