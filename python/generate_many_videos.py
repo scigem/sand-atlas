@@ -108,11 +108,11 @@ os.system("ffmpeg -y -i all_particles.webm -crf 45 upload/all_particles.webm" + 
 
 # Make zips for uploading
 print("    Making zips...")
-os.system("zip upload/meshes_high.zip " + foldername + "/stl_HIGH/*.stl")
-os.system("zip upload/meshes_medium.zip " + foldername + "/stl_MEDIUM/*.stl")
-os.system("zip upload/meshes_low.zip " + foldername + "/stl_LOW/*.stl")
-os.system("zip upload/meshes_very_low.zip " + foldername + "/stl_VERY_LOW/*.stl")
-os.system("zip upload/level_sets.zip " + foldername + "/vdb/*.vdb")
+os.system("zip -j upload/meshes_high.zip " + foldername + "/stl_HIGH/*.stl")
+os.system("zip -j upload/meshes_medium.zip " + foldername + "/stl_MEDIUM/*.stl")
+os.system("zip -j upload/meshes_low.zip " + foldername + "/stl_LOW/*.stl")
+os.system("zip -j upload/meshes_very_low.zip " + foldername + "/stl_VERY_LOW/*.stl")
+os.system("zip -j upload/level_sets.zip " + foldername + "/vdb/*.vdb")
 for quality in ["HIGH", "MEDIUM", "LOW", "VERY_LOW"]:
     os.system(
         f"cp {foldername}/stl_{quality}/00000.stl upload/ref_particle_{quality}.stl"
