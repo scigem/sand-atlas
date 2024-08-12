@@ -119,7 +119,9 @@ print("Uploading to server...")
 username = input("Enter your username: ")
 
 remote_path = f"{username}@awsrpdweb3924.shared.sydney.edu.au:/mnt/sand-atlas/sands/{sand_type}-sand/"
-os.system(f"rsync -avz --partial --progress upload/* {remote_path}")
+scp_command = f"scp -r upload/* {remote_path}"
+# rsync_command = f"rsync -avz --partial --progress upload/* {remote_path}"
+os.system(scp_command)
 
 # Step 5: Cleanup
 print("Cleaning up...")
