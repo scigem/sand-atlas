@@ -113,7 +113,10 @@ os.system("zip upload/meshes_medium.zip " + foldername + "/stl_MEDIUM/*.stl")
 os.system("zip upload/meshes_low.zip " + foldername + "/stl_LOW/*.stl")
 os.system("zip upload/meshes_very_low.zip " + foldername + "/stl_VERY_LOW/*.stl")
 os.system("zip upload/level_sets.zip " + foldername + "/vdb/*.vdb")
-os.system(f"cp {foldername}/stl_HIGH/00000.stl upload/ref_particle.stl")
+for quality in ["HIGH", "MEDIUM", "LOW", "VERY_LOW"]:
+    os.system(
+        f"cp {foldername}/stl_{quality}/00000.stl upload/ref_particle_{quality}.stl"
+    )
 
 # Step 4: Upload to server
 print("Uploading to server...")

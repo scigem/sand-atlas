@@ -33,40 +33,37 @@
 		<section id="graphs" style="height:500px;">
 			<div class="inner">
 				<div class="graph right" id="stl-viewer">{% include stl_viewer.html %}
-					<div style="user-select: none;">Drag to look around</div>
+					<div style="user-select: none;">Low quality mesh. Drag to look around.</div>
 				</div>
 
-			{% if page.data.lat_lon %}
-			<iframe loading="lazy" allowfullscreen class="map right"
-				src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.data.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>
-			{% endif %}
+				{% if page.data.lat_lon %}
+				<iframe loading="lazy" allowfullscreen class="map right" src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.data.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>
+				{% endif %}
 
-			{% include 2d_scatterplot.html title=page.data.title x=page.data.equivalent_diameter
-			y=page.data.aspect_ratio id=page.data.id x_label='"Equivalent diameter (mm)"' y_label='"Aspect ratio (-)"'
-			%}
-		</div>
+				{% include 2d_scatterplot.html title=page.data.title x=page.data.equivalent_diameter
+				y=page.data.aspect_ratio id=page.data.id x_label='"Equivalent diameter (mm)"' y_label='"Aspect ratio (-)"'
+				%}
+			</div>
 
 			<!-- {{ content }} -->
 		</section>
-	<!-- </div> -->
+		<!-- </div> -->
 
-	<div class="inner">
-		<p>
-			{% if page.data.publication_url %}This data was originally reported in <a
-				href="{{ page.data.publication_url }}">this publication</a>.{% endif %}
-			{% if page.data.source_data_url %}You can find the <a href="{{ page.data.source_data_url }}">original data
-				here</a>. {% endif %}
-			For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.mm_per_pixel}} mm. <!-- that you can <a href="{{ page.data.download_url }}">download here</a>. -->
+		<div class="inner">
+			<p>
+				{% if page.data.publication_url %}This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>.{% endif %}
+				{% if page.data.source_data_url %}You can find the <a href="{{ page.data.source_data_url }}">original data
+					here</a>. {% endif %}
+				For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.mm_per_pixel}} mm. <!-- that you can <a href="{{ page.data.download_url }}">download here</a>. -->
 				{% include dropdown.html sand=page.dir %}
-		</p>
-		<p>
-			{% if page.data.source_license %}Source data is licensed under: {{ page.data.source_license }}{% endif %}
-			<br>
-			This derivative data is licensed under: <a href='https://creativecommons.org/licenses/by/4.0/'><img
-					src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
-			{% if page.data.contributor %}<br>Contributor: {{ page.data.contributor }}{% endif %}
-		</p>
-	</div>
+			</p>
+			<p>
+				{% if page.data.source_license %}Source data is licensed under: {{ page.data.source_license }}{% endif %}
+				<br>
+				This derivative data is licensed under: <a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
+				{% if page.data.contributor %}<br>Contributor: {{ page.data.contributor }}{% endif %}
+			</p>
+		</div>
 
 		<!-- From these surfaces, we have used <a href="https://www.mathworks.com/matlabcentral/fileexchange/92488-shape-shape-analyser-for-particle-engineering">SHAPE</a> to determine that {{ page.data.title }} has the following properties:
 				<ul>
@@ -78,7 +75,7 @@
 		{% include video_gallery.html title=page.dir number_of_particles=page.data.number_of_particles
 		video_id=page.data.vimeo_id%}
 
-		
+
 
 	</div>
 

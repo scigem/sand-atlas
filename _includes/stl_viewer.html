@@ -32,6 +32,8 @@
 
         import { STLLoader } from 'three/addons/loaders/STLLoader.js';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+
 
         let camera, cameraTarget, scene, renderer, controls;
 
@@ -58,7 +60,7 @@
 
         function init() {
 
-            camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.001, 2);
+            camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.001, 10);
             camera.position.set(-2, 0, 0);
 
             cameraTarget = new THREE.Vector3(0, 0, 0);
@@ -71,47 +73,77 @@
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setAnimationLoop(animate);
-            
-            
+
+
             container.appendChild(renderer.domElement);
 
             // lighting
             const light = new THREE.DirectionalLight(0xffffff, 10);
-            light.position.set(1, 1, 1).normalize();
+            light.position.set(-1, 1, 1).normalize();
             scene.add(light);
-            
+            const light2 = new THREE.DirectionalLight(0xffffff, 10);
+            light2.position.set(1, 1, 1).normalize();
+            scene.add(light2);
+
             controls = new OrbitControls(camera, container);
-            controls.minDistance = 1;
-            controls.maxDistance = 2;
+            controls.minDistance = 0.5;
+            controls.maxDistance = 3;
             // controls.addEventListener('change', render);
 
-            
-            
-            window.addEventListener('resize', onWindowResize);
-            console.log('{{page.dir}}')
-            const loader = new STLLoader();
-            loader.load('https://data.scigem-eng.sydney.edu.au/sand-atlas{{ page.dir }}ref_particle.stl', function (geometry) {
+            let params = {
+                quality: 'LOW'
+            };
 
-                const material = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, roughness: 0.5, metalness: 0.5 });
-                material.shading = THREE.FlatShading;
-                const mesh = new THREE.Mesh(geometry, material);
+            let gui = new GUI({ width: 200 });
+            gui.add(params, 'quality', ['VERY_LOW', 'LOW', 'MEDIUM', 'HIGH']).name('Quality').onChange(function (value) {
 
-                // Calculate bounding box and scale the mesh
-                const boundingBox = getWorldBoundingBox(mesh);
-                const size = boundingBox.getSize(new THREE.Vector3());
-                const maxDimension = Math.max(size.x, size.y, size.z);
-                const scale = 1 / maxDimension;
-                mesh.scale.set(scale, scale, scale);
+                scene.traverse(function (child) {
 
-                // Optionally, center the mesh
-                const center = boundingBox.getCenter(new THREE.Vector3());
-                mesh.position.sub(center.multiplyScalar(scale));
+                    if (child instanceof THREE.Mesh) child.visible = child.name === value;
 
-                scene.add(mesh);
+                });
 
             });
+            document.body.appendChild(gui.domElement); // Ensure it's appended to the body
+            gui.domElement.style.position = 'absolute'; // Make sure it's not affected by layout flow
+            gui.domElement.style.top = '10px'; // Adjust positioning as necessary
+            gui.domElement.style.right = '10px'; // Position it in a visible area
+            gui.domElement.style.zIndex = '1000'; // Ensure it's on top of other elements
 
-            
+            window.addEventListener('resize', onWindowResize);
+            // console.log('{{page.dir}}')
+            for (let q of ['VERY_LOW', 'LOW', 'MEDIUM', 'HIGH']) {
+                loadSTL(q);
+            }
+
+            function loadSTL(q) {
+                const loader = new STLLoader();
+                loader.load('https://data.scigem-eng.sydney.edu.au/sand-atlas{{ page.dir }}ref_particle_' + q + '.stl', function (geometry) {
+
+                    const material = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, roughness: 0.5, metalness: 0.5 });
+                    material.shading = THREE.FlatShading;
+                    const mesh = new THREE.Mesh(geometry, material);
+                    mesh.name = q;
+
+                    // Calculate bounding box and scale the mesh
+                    const boundingBox = getWorldBoundingBox(mesh);
+                    const size = boundingBox.getSize(new THREE.Vector3());
+                    const maxDimension = Math.max(size.x, size.y, size.z);
+                    const scale = 1 / maxDimension;
+                    mesh.scale.set(scale, scale, scale);
+
+                    // Optionally, center the mesh
+                    const center = boundingBox.getCenter(new THREE.Vector3());
+                    mesh.position.sub(center.multiplyScalar(scale));
+
+                    mesh.visible = q === params.quality;
+
+                    scene.add(mesh);
+
+                });
+            }
+
+
 
         }
 
