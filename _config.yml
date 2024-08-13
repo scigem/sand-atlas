@@ -50,3 +50,6 @@ defaults:
 
 # Google Analytics
 google_analytics: G-H3CZGKG5YZ
+
+plugins:
+  - jekyll-sitemap
