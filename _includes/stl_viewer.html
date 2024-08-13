@@ -91,11 +91,11 @@
             // controls.addEventListener('change', render);
 
             let params = {
-                quality: 'LOW'
+                quality: '30'
             };
 
             let gui = new GUI({ width: 200 });
-            gui.add(params, 'quality', ['VERY_LOW', 'LOW', 'MEDIUM', 'HIGH']).name('Quality').onChange(function (value) {
+            gui.add(params, 'quality', ['3', '10', '30', '100', 'ORIGINAL']).name('Quality').onChange(function (value) {
 
                 scene.traverse(function (child) {
 
@@ -112,7 +112,7 @@
 
             window.addEventListener('resize', onWindowResize);
             // console.log('{{page.dir}}')
-            for (let q of ['VERY_LOW', 'LOW', 'MEDIUM', 'HIGH']) {
+            for (let q of ['3', '10', '30', '100', 'ORIGINAL']) {
                 loadSTL(q);
             }
 
