@@ -17,11 +17,29 @@
         } */
         #stl-viewer {
             max-width: 31%;
+            position: relative;
             /* width: 30%; */
             /* height: 300px; */
             /* display: inline-block; */
             /* overflow: hidden; */
             /* position: relative; */
+        }
+
+        .lil-gui {
+            position: absolute;
+            /* bottom: 0; */
+            /* height: 30px; */
+            /* top: -100px; */
+        }
+
+        .lil-gui.autoPlace {
+            position: absolute;
+
+        }
+
+        .lil-gui .title {
+            visibility: hidden;
+            height: 0;
         }
     </style>
 </head>
@@ -104,11 +122,7 @@
                 });
 
             });
-            container.appendChild(gui.domElement); // Ensure it's appended to the body
-            gui.domElement.style.position = 'relative'; // Make sure it's not affected by layout flow
-            gui.domElement.style.top = '-100px'; // Adjust positioning as necessary
-            // gui.domElement.style.right = '10px'; // Position it in a visible area
-            gui.domElement.style.zIndex = '1000'; // Ensure it's on top of other elements
+            container.prepend(gui.domElement); // Ensure it's appended to the body
 
             window.addEventListener('resize', onWindowResize);
             // console.log('{{page.dir}}')

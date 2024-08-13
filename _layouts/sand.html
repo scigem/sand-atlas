@@ -33,7 +33,7 @@
 		<section id="graphs" style="height:500px;">
 			<div class="inner">
 				<div class="graph right" id="stl-viewer">{% include stl_viewer.html %}
-					<div style="user-select: none;">Drag to look around.</div>
+					<div style="user-select: none;position:absolute;bottom:0;left:0">Drag to look around.</div>
 				</div>
 
 				{% if page.data.lat_lon %}
@@ -51,6 +51,7 @@
 
 		<div class="inner">
 			<p>
+				The meshed data is available in five different qualities. Original indicates that the mesh resolution is the same as the original voxel data. Numerical values of mesh quality indicate the approximate number of facets across the smallest dimension of the particle. You can view the different meshes above and change between them. Meshes are available as STL files below. Level set data is available in the open standard VDB.
 				{% if page.data.publication_url %}This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>.{% endif %}
 				{% if page.data.source_data_url %}You can find the <a href="{{ page.data.source_data_url }}">original data
 					here</a>. {% endif %}
