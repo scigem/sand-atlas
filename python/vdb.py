@@ -57,25 +57,36 @@ volume_to_mesh_modifier.threshold = (
     0.5  # Set the threshold for the volume to mesh conversion
 )
 
-for quality in ["HIGH", "MEDIUM", "LOW", "VERY_LOW"]:
-    if quality == "HIGH":
-        # Adjust the voxel size for fineness
-        volume_to_mesh_modifier.voxel_size = 1.0
-        # Set adaptivity to control mesh simplification
-        volume_to_mesh_modifier.adaptivity = 0.0
-    elif quality == "MEDIUM":
-        # Adjust the voxel size for speed
-        volume_to_mesh_modifier.voxel_size = 1.0
-        # Set adaptivity to control mesh simplification
-        volume_to_mesh_modifier.adaptivity = 1.0
-    elif quality == "LOW":
-        mesh_obj = bpy.context.active_object
-        remesh_modifier = mesh_obj.modifiers.new(name="Remesh", type="REMESH")
-        remesh_modifier.mode = "VOXEL"
-        remesh_modifier.voxel_size = 10
+# Adjust the voxel size for fineness
+volume_to_mesh_modifier.voxel_size = 1.0
+# Set adaptivity to control mesh simplification
+volume_to_mesh_modifier.adaptivity = 0.0
+# cube.modifier_apply(modifier="Remesh")
+bpy.ops.object.modifier_apply(modifier="VolumeToMesh")
 
-    elif quality == "VERY_LOW":
-        remesh_modifier.voxel_size = 100
+dim = cube.dimensions
+dim_min = numpy.amin([dim.x, dim.y, dim.z])
+# Set the voxel size for the volume to mesh conversion
+# HIGH uses original voxel size
+# MEDIUM uses 100 voxels across the smallest dimension
+# LOW uses 30 voxels across the smallest dimension
+# VERY_LOW uses 10 voxels across the smallest dimension
+voxel_sizes = [1, dim_min / 100, dim_min / 30, dim_min / 10, dim_min / 3]
+print(voxel_sizes)
+
+for quality in ["ORIGINAL", "100", "30", "10", "3"]:
+    if quality == "ORIGINAL":
+        pass
+    elif quality == "100":
+        remesh_modifier = cube.modifiers.new(name="Remesh", type="REMESH")
+        remesh_modifier.mode = "VOXEL"
+        remesh_modifier.voxel_size = voxel_sizes[1]
+    elif quality == "30":
+        remesh_modifier.voxel_size = voxel_sizes[2]
+    elif quality == "10":
+        remesh_modifier.voxel_size = voxel_sizes[3]
+    elif quality == "3":
+        remesh_modifier.voxel_size = voxel_sizes[4]
 
     # The volume is now a mesh object
     mesh_obj = bpy.context.active_object

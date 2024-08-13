@@ -38,7 +38,7 @@ extension = filename.split(".")[-1]
 if not os.path.exists(filename[: -len(extension) - 1]):
     os.mkdir(filename[: -len(extension) - 1])
 
-for subfolder in ["npy", "stl_VERY_LOW", "stl_LOW", "stl_MEDIUM", "stl_HIGH", "vdb"]:
+for subfolder in ["npy", "stl_3", "stl_10", "stl_30", "stl_100", "stl_ORIGINAL", "vdb"]:
     if not os.path.exists(filename[: -len(extension) - 1] + f"/{subfolder}/"):
         os.mkdir(filename[: -len(extension) - 1] + f"/{subfolder}/")
 
