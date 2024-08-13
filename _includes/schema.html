@@ -1,0 +1,22 @@
+<script type="application/ld+json">
+    {
+      "@context":"https://schema.org/",
+      "@type":"Dataset",
+      "name":"{{ page.data.title }}",
+      "url":"{{ page.url | absolute_url }}",
+      "keywords":[
+         "Granular media",
+         "Granular matter",
+         "Particulate",
+         "X-ray CT",
+         "Particles",
+         "Sand"
+      ],
+      "license" : "{{ page.data.source_license }}",
+      "isAccessibleForFree" : true,
+      "creator":{
+         "@type":"Person",
+         "name":"{{ page.data.contributor }}"
+      }
+    }
+    </script>
