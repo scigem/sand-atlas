@@ -34,7 +34,7 @@ else:
 
 # Step 2: Render each grain using blender, then convert to a video with ffmpeg
 print("Rendering videos...")
-files = glob.glob(foldername + "/stl_HIGH/*.stl")
+files = glob.glob(foldername + "/stl_ORIGINAL/*.stl")
 files.sort()
 
 # with open(f"../_data/sands/{sand_type}-sand.json") as f:
@@ -66,7 +66,7 @@ for i, file in tqdm(enumerate(files), total=len(files)):
 
 # Step 3: Stitch videos together into a grid
 print("Stitching videos together...")
-files = glob.glob(foldername + "/stl_HIGH/*.webm")
+files = glob.glob(foldername + "/stl_ORIGINAL/*.webm")
 files.sort()
 num_particles = len(files)
 num_grids = int(numpy.ceil(num_particles / 12))  # round

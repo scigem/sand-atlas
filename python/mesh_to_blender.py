@@ -8,7 +8,11 @@ from math import radians
 
 
 filename = sys.argv[-1]
-
+if filename.isdigit():
+    frame_end = int(sys.argv[-1])
+    filename = sys.argv[-2]
+else:
+    frame_end = 60
 # Deselect all objects
 bpy.ops.object.select_all(action="DESELECT")
 
@@ -26,7 +30,7 @@ scene.collection.children.link(new_collection)
 
 scene.transform_orientation_slots[0].type = "LOCAL"
 scene.frame_start = 1
-scene.frame_end = 60
+scene.frame_end = frame_end
 
 scene.render.resolution_x = 1000
 scene.render.resolution_y = 1000
@@ -97,12 +101,12 @@ ob.scale = (1.0 / dim_max, 1.0 / dim_max, 1.0 / dim_max)
 new_collection.objects.link(ob)
 
 ob.keyframe_insert("rotation_euler", frame=1)
-ob.rotation_euler.z = radians(360 * 1 / 60)
+ob.rotation_euler.z = radians(360 * 1 / frame_end)
 ob.keyframe_insert("rotation_euler", frame=2)
-ob.rotation_euler.z = radians(360 * 59 / 60)
-ob.keyframe_insert("rotation_euler", frame=59)
+ob.rotation_euler.z = radians(360 * (frame_end - 1) / frame_end)
+ob.keyframe_insert("rotation_euler", frame=frame_end - 1)
 ob.rotation_euler.z = radians(360)
-ob.keyframe_insert("rotation_euler", frame=60)
+ob.keyframe_insert("rotation_euler", frame=frame_end)
 
 # make everything rotate around its local axis
 mesh_obs = [o for o in scene.objects if o.type == "MESH"]
