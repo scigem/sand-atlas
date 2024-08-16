@@ -136,6 +136,7 @@
 
                     const material = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, roughness: 0.5, metalness: 0.5 });
                     material.shading = THREE.FlatShading;
+                    material.side = THREE.DoubleSide;
                     const mesh = new THREE.Mesh(geometry, material);
                     mesh.name = q;
 
