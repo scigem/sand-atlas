@@ -122,7 +122,9 @@ os.system("zip -j upload/level_sets.zip " + foldername + "/vdb/*.vdb")
 print("Uploading to server...")
 username = input("Enter your username: ")
 
-remote_path = f"{username}@awsrpdweb3924.shared.sydney.edu.au:/mnt/sand-atlas/sands/{sand_type}-sand/"
+# remote_path = f"{username}@awsrpdweb3924.shared.sydney.edu.au:/mnt/sand-atlas/sands/{sand_type}-sand/"
+remote_path = f"{username}@research-data-int.sydney.edu.au:/rds/PRJ-SciGEMData/sand-atlas/sands/{sand_type}-sand/"
+
 scp_command = f"scp -r upload/* {remote_path}"
 # rsync_command = f"rsync -avz --partial --progress upload/* {remote_path}"
 os.system(scp_command)
