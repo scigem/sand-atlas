@@ -30,7 +30,7 @@ for i, file in tqdm(enumerate(files), total=len(files)):
     if not os.path.exists(file[:-4] + ".mp4"):
         # Use blender to render an animation of this grain rotating
         os.system(
-            "/Applications/Blender.app/Contents/MacOS/Blender --background -t 4 --python mesh_to_blender.py -- "
+            "blender --background -t 4 --python mesh_to_blender.py -- "
             + file
             + " 120 "  # 120 frames to make a 4 second video
             + " > /dev/null 2>&1"

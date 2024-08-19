@@ -45,7 +45,7 @@ for i, file in tqdm(enumerate(files), total=len(files)):
     if not os.path.exists(file[:-4] + ".webm"):
         # Use blender to render an animation of this grain rotating
         os.system(
-            "/Applications/Blender.app/Contents/MacOS/Blender --background -t 4 --python mesh_to_blender.py -- "
+            "blender --background -t 4 --python mesh_to_blender.py -- "
             + file
             + " > /dev/null 2>&1"
         )
