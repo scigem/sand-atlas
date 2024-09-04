@@ -46,7 +46,10 @@ for subfolder in ["npy", "stl_3", "stl_10", "stl_30", "stl_100", "stl_ORIGINAL",
 print("Loading data... ", end="")
 
 if (extension.lower() == "tif") or (extension.lower() == "tiff"):
-    labelled_data = tifffile.memmap(filename)
+    try:
+        labelled_data = tifffile.memmap(filename)
+    except: # memmap doesnt work for compressed tifs
+        labelled_data = tifffile.imread(filename)
 elif extension.lower() == "raw":
     shape = tuple(numpy.array(filename.split("_")[-1][:-4].split("x"), dtype="int"))
     labelled_data = numpy.memmap(filename, shape=shape)

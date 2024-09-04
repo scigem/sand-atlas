@@ -17,7 +17,7 @@ else:
 # Pass in a path to a labelled image stack
 filename = sys.argv[1]
 sand_type = sys.argv[2]
-foldername = "".join(filename.split(".")[:-1])
+foldername = ".".join(filename.split(".")[:-1])
 
 if not os.path.exists("blank.webm"):
     matplotlib.image.imsave("blank.png", numpy.zeros((1000, 1000, 4)))
