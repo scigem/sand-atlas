@@ -18,6 +18,7 @@ else:
 
 data = numpy.load(input_file)
 
+# outname = ".".join(input_file.split(".")[:-1])
 input_folder = "/".join(
     input_file.split("/")[:-2]
 )  # Get the folder name stripping the "npy" part too
@@ -30,21 +31,12 @@ grid.background = 0.0
 grid.gridClass = pyopenvdb.GridClass.FOG_VOLUME
 grid.name = "density"
 
-# Apply scaling transformation to OpenVDB grid
-grid.transform = pyopenvdb.createLinearTransform(voxelSize=voxel_size_m)
-
 # Write the OpenVDB grid to a file
 vdb_file = "/tmp/volume.vdb"
 pyopenvdb.write(vdb_file, grids=[grid])
 
 # Import the OpenVDB file into Blender
 bpy.ops.object.volume_import(filepath=vdb_file)
-
-volume = bpy.context.active_object  # Capture the imported volume object
-
-# Set the scale in Blender based on voxel size
-# If voxel_size_m is < 1, scale up the object accordingly in Blender
-volume.scale = (1 / voxel_size_m, 1 / voxel_size_m, 1 / voxel_size_m)  
 
 # Deselect all objects
 bpy.ops.object.select_all(action="DESELECT")
@@ -60,7 +52,6 @@ bpy.context.view_layer.objects.active = cube
 
 # Add the "Volume to Mesh" modifier
 volume_to_mesh_modifier = cube.modifiers.new(name="VolumeToMesh", type="VOLUME_TO_MESH")
-
 bpy.context.object.modifiers["VolumeToMesh"].object = bpy.data.objects["volume"]
 
 # Set the parameters for the "Volume to Mesh" modifier
@@ -72,21 +63,17 @@ volume_to_mesh_modifier.threshold = (
 )
 
 # Adjust the voxel size for fineness
-volume_to_mesh_modifier.voxel_size = voxel_size_m
+volume_to_mesh_modifier.voxel_size = 1.0
 # Set adaptivity to control mesh simplification
 volume_to_mesh_modifier.adaptivity = 0.0
-
-# Apply the "VolumeToMesh" modifier
+# Apply the "Volume to Mesh" modifier
 bpy.ops.object.modifier_apply(modifier="VolumeToMesh")
 
+# Get the dimensions of the cube
 dim = cube.dimensions
 dim_min = numpy.amin([dim.x, dim.y, dim.z])
-# Set the voxel size for the volume to mesh conversion
-# HIGH uses original voxel size
-# MEDIUM uses 100 voxels across the smallest dimension
-# LOW uses 30 voxels across the smallest dimension
-# VERY_LOW uses 10 voxels across the smallest dimension
-# VERY_VERY_LOW uses 3 voxels across the smallest dimension
+
+# Define voxel sizes for different qualities
 voxel_sizes = [1, dim_min / 100, dim_min / 30, dim_min / 10, dim_min / 3]
 print(voxel_sizes)
 
@@ -106,7 +93,9 @@ for quality in ["ORIGINAL", "100", "30", "10", "3"]:
 
     # The volume is now a mesh object
     mesh_obj = bpy.context.active_object
-    # The mesh is scaled based on voxel size
+
+    # Scale the mesh based on the voxel size
+    mesh_obj.scale = (voxel_size_m, voxel_size_m, voxel_size_m)
 
     # Export the mesh as an STL file
     output_path = (
@@ -116,7 +105,9 @@ for quality in ["ORIGINAL", "100", "30", "10", "3"]:
         filepath=output_path, export_selected_objects=True, apply_modifiers=True
     )
 
+# Set the grid as a level set
+grid.transform = pyopenvdb.createLinearTransform(voxelSize=1.0)
+
 # Write the grid to a VDB file
 output_path = f"{input_folder}/vdb/{particle_name}.vdb"
 pyopenvdb.write(output_path, grids=[grid])
-
