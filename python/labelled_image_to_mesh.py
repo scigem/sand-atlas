@@ -5,32 +5,23 @@ import skimage
 import tqdm
 import tifffile
 import subprocess
+import scipy.ndimage
 
 # from stl import mesh
 
-blender_path = "/Applications/Blender.app/Contents/MacOS/Blender"  # Adjust this to your Blender installation
+# blender_path = "/Applications/Blender.app/Contents/MacOS/Blender"  # Adjust this to your Blender installation
+# blender_script_path = os.path.expanduser(
+#     "~/code/sand-atlas/python/vdb.py"
+# )  # Adjust this to the path of your Blender script
+blender_path = "/snap/bin/blender"  # Adjust this to your Blender installation
 blender_script_path = os.path.expanduser(
-    "~/code/sand-atlas/python/vdb.py"
+    "/home/ivego/sand-atlas/sand-atlas/python/vdb.py"
 )  # Adjust this to the path of your Blender script
 
-
-def write_poly(vertices, faces, filename):
-    # Save the mesh to a POLY file
-    with open(filename, "w") as f:
-        # Write the vertices
-        f.write("POINTS\n")
-        for i, vertex in enumerate(vertices):
-            f.write(f"{i+1}: {vertex[0]} {vertex[1]} {vertex[2]}\n")
-
-        # Write the faces
-        f.write("POLYS\n")
-        for i, face in enumerate(faces):
-            f.write(f"{i+1}: {face[0]+1} {face[1]+1} {face[2]+1}\n")
-
-        f.write("END")
-
-
 filename = sys.argv[1]
+
+voxel_size_um = float(input("Enter the voxel size in micrometers (µm): "))
+voxel_size_m = voxel_size_um * 1e-6
 
 debug = True
 
@@ -46,10 +37,7 @@ for subfolder in ["npy", "stl_3", "stl_10", "stl_30", "stl_100", "stl_ORIGINAL",
 print("Loading data... ", end="")
 
 if (extension.lower() == "tif") or (extension.lower() == "tiff"):
-    try:
-        labelled_data = tifffile.memmap(filename)
-    except: # memmap doesnt work for compressed tifs
-        labelled_data = tifffile.imread(filename)
+    labelled_data = tifffile.memmap(filename)
 elif extension.lower() == "raw":
     shape = tuple(numpy.array(filename.split("_")[-1][:-4].split("x"), dtype="int"))
     labelled_data = numpy.memmap(filename, shape=shape)
@@ -71,13 +59,14 @@ print("Done")
 num_particles = numpy.amax(labelled_data)
 print(f"Found {num_particles} labels")
 
-props = skimage.measure.regionprops(labelled_data)
+spacing = (voxel_size_m, voxel_size_m, voxel_size_m)
+props = skimage.measure.regionprops(labelled_data, spacing=spacing)
 print("Calculated region properties")
 
 # filter out small particles
 j = 0
-for i in tqdm.tqdm(range(1, num_particles)):
-    if props[i].area > 100:
+for i in tqdm.tqdm(range(0, num_particles)):
+    if props[i].area > 100*(voxel_size_m**3):
         j += 1
 
 print(f"Only {j} particles are larger than 100 voxels")
@@ -85,8 +74,8 @@ print(f"Only {j} particles are larger than 100 voxels")
 nx, ny, nz = labelled_data.shape
 j = 0
 
-for i in tqdm.tqdm(range(1, num_particles)):
-    if props[i].area > 100:
+for i in tqdm.tqdm(range(0, num_particles)):
+    if props[i].area > 100*(voxel_size_m**3):
         # print(i, props[i].label)
         x_min, y_min, z_min, x_max, y_max, z_max = props[i].bbox
 
@@ -106,8 +95,10 @@ for i in tqdm.tqdm(range(1, num_particles)):
 
             this_particle = numpy.pad(this_particle, 1, mode="constant")
 
-            outname = filename[: -len(extension) - 1] + f"/npy/particle_{j:05}.npy"
+            outname = filename[: -len(extension) - 1] + f"/npy/particle_{props[i].label:05}.npy"
             numpy.save(outname, this_particle)
+
+            print(str(voxel_size_m))
 
             subprocess.run(
                 [
@@ -117,8 +108,10 @@ for i in tqdm.tqdm(range(1, num_particles)):
                     blender_script_path,
                     "--",
                     outname,
+                    str(voxel_size_m)  # Pass voxel_size as an argument
                 ]
             )
 
             j += 1
 print(f"{j} out of {num_particles} particles saved to disk")
+

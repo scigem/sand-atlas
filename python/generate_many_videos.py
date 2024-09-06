@@ -17,7 +17,7 @@ else:
 # Pass in a path to a labelled image stack
 filename = sys.argv[1]
 sand_type = sys.argv[2]
-foldername = ".".join(filename.split(".")[:-1])
+foldername = "".join(filename.split(".")[:-1])
 
 if not os.path.exists("blank.webm"):
     matplotlib.image.imsave("blank.png", numpy.zeros((1000, 1000, 4)))
@@ -27,10 +27,12 @@ if not os.path.exists("blank.webm"):
 
 # Step 1: convert labelled image to a set of meshes
 print("Converting labelled image to meshes...")
-if os.path.exists(foldername + "/npy/particle_00000.npy"):
+if os.path.exists(foldername + "/npy/particle_00001.npy"):
     print("    Meshes already exist, skipping step 1")
 else:
     os.system("python labelled_image_to_mesh.py " + filename)
+
+# sys.exit()
 
 # Step 2: Render each grain using blender, then convert to a video with ffmpeg
 print("Rendering videos...")
@@ -41,7 +43,10 @@ files.sort()
 #     json_data = json.load(f)
 # ids = json_data["id"].replace("'", "").split(", ")
 
-for i, file in tqdm(enumerate(files), total=len(files)):
+#==== Changed here to render less particles
+max_files = min(72, len(files))  # Limiting to 72 files max
+
+for i, file in tqdm(enumerate(files[:max_files]), total=min(48, max_files)):  # Adjusted range to max_files
     if not os.path.exists(file[:-4] + ".webm"):
         # Use blender to render an animation of this grain rotating
         os.system(
@@ -64,12 +69,16 @@ for i, file in tqdm(enumerate(files), total=len(files)):
         os.system("rm -rf " + file[:-4] + "/*.png")
         os.system("rmdir " + file[:-4])
 
+
+# sys.exit()
+
 # Step 3: Stitch videos together into a grid
 print("Stitching videos together...")
 files = glob.glob(foldername + "/stl_ORIGINAL/*.webm")
 files.sort()
-num_particles = len(files)
-num_grids = int(numpy.ceil(num_particles / 12))  # round
+num_particles = min(72, len(files))  #==== Changed here to limit to 72 particles
+num_grids = int(numpy.ceil(num_particles / 12))  # Adjusted for a maximum of 72 particles
+
 for i in range(num_particles, num_grids * 12):  # pad with blank videos
     files.append("blank.webm")
 
@@ -100,11 +109,11 @@ os.system(
     "ffmpeg -y -f concat -safe 0 -i sources.txt -c copy all_particles.webm" + silence
 )
 
-if not os.path.exists("upload"):
-    os.makedirs("upload")
+if not os.path.exists(foldername + "/upload"):
+    os.makedirs(foldername + "/upload")
 
 print("    Reducing file size...")
-os.system("ffmpeg -y -i all_particles.webm -crf 45 upload/all_particles.webm" + silence)
+os.system("ffmpeg -y -i all_particles.webm -crf 45 "+ foldername+"/upload/all_particles.webm" + silence)
 
 # Make zips for uploading
 print("    Making zips...")
@@ -114,7 +123,7 @@ if not os.path.exists("upload"):
 for quality in ["ORIGINAL", "100", "30", "10", "3"]:
     os.system(f"zip -j upload/meshes_{quality}.zip {foldername}/stl_{quality}/*.stl")
     os.system(
-        f"cp {foldername}/stl_{quality}/particle_00000.stl upload/ref_particle_{quality}.stl"
+        f"cp {foldername}/stl_{quality}/particle_00001.stl upload/ref_particle_{quality}.stl"
     )
 os.system("zip -j upload/level_sets.zip " + foldername + "/vdb/*.vdb")
 
@@ -135,5 +144,5 @@ if not debug:
     os.system("rm grid_*.webm")
 
 
-# os.system(
-#     f"mv all_particles_smaller.webm ~/code/sand-atlas/assets/sands/{sand_type}-sand/all_particles.webm")
+os.system(
+    f"mv all_particles_smaller.webm ~/code/sand-atlas/assets/sands/{sand_type}-sand/all_particles.webm")
