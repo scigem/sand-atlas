@@ -27,7 +27,8 @@ if not os.path.exists("blank.webm"):
 
 # Step 1: convert labelled image to a set of meshes
 print("Converting labelled image to meshes...")
-if os.path.exists(foldername + "/npy/particle_00001.npy"):
+# Check if there is at least one .npy file in the folder
+if glob.glob(foldername + "/npy/*.npy"):
     print("    Meshes already exist, skipping step 1")
 else:
     os.system("python labelled_image_to_mesh.py " + filename)
@@ -44,9 +45,9 @@ files.sort()
 # ids = json_data["id"].replace("'", "").split(", ")
 
 #==== Changed here to render less particles
-max_files = min(72, len(files))  # Limiting to 72 files max
-
-for i, file in tqdm(enumerate(files[:max_files]), total=min(48, max_files)):  # Adjusted range to max_files
+start_index = 0  # Specify the index to start rendering from
+max_files = min(72, len(files) - start_index)  # Calculate max_files based on start_index
+for i, file in tqdm(enumerate(files[start_index:start_index + max_files]), total=max_files):  # Adjusted range to max_files
     if not os.path.exists(file[:-4] + ".webm"):
         # Use blender to render an animation of this grain rotating
         os.system(
@@ -68,7 +69,6 @@ for i, file in tqdm(enumerate(files[:max_files]), total=min(48, max_files)):  # 
         # Clean up the rendered images
         os.system("rm -rf " + file[:-4] + "/*.png")
         os.system("rmdir " + file[:-4])
-
 
 # sys.exit()
 
