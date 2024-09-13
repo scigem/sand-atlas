@@ -14,7 +14,7 @@ voxel_size_m = float(sys.argv[-1])  # Voxel size is the last argument
 if voxel_size_m <= 0:
     raise ValueError("Voxel size must be a positive, non-zero value.")
 else:
-    print(voxel_size_m-1)
+    print("Voxel size [m]=", voxel_size_m)
 
 data = numpy.load(input_file)
 
