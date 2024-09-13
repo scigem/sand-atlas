@@ -1,50 +1,56 @@
 import sys
-import glob
+import os
 import numpy
 import skimage
-import tqdm
+import tifffile, nrrd
+import pandas as pd
+import json
 
+labelled_filename = sys.argv[1] # path to labelled image
+raw_filename = sys.argv[2] # path to raw image
+json_file = sys.argv[3] # path to json file
 
-def jsonlike_print(name, arr):
-    print('"' + name + '": "', end='')
-    if isinstance(arr, int):
-        print(arr, end='')
-    elif isinstance(arr, float):
-        print(arr, end='')
-    elif isinstance(arr, numpy.ndarray):
-        print(*arr.tolist(), sep=',', end='')
-    print('",')
+with open(json_file) as f:
+    json_data = json.load(f)
+    pixel_size = float(json_data["microns_per_pixel"])*1e-6
 
+sand_type = json_file.split('/')[-1].split('.')[0]
+outfolder = '/'.join(json_file.split('/')[:-3]) + '/assets/sands/' + sand_type + '/'
+if not os.path.exists(outfolder):
+    os.makedirs(outfolder)
+outname = outfolder + 'summary.csv'
 
-foldername = sys.argv[1]
-pixel_size = float(sys.argv[2])  # mm per pixel
+d = []
+for filename in [labelled_filename, raw_filename]:
+    extension = filename.split('.')[-1]
 
-files = glob.glob(foldername + '/*.npz')
-files.sort()
+    if ( extension.lower() == 'tif' ) or ( extension.lower() == 'tiff'):
+        try:
+            data = tifffile.memmap(filename)
+        except:
+            data = tifffile.imread(filename)
+    elif ( extension.lower() == 'raw' ):
+        # only used for Max's data
+        data = numpy.memmap(filename, dtype='uint16', mode='r', shape=(1651,1651,1651))
+    elif ( extension.lower() == 'npz' ):
+        data = numpy.load(filename, allow_pickle=True)['arr_0']
+    elif ( extension.lower() == 'nrrd' ):
+        data, header = nrrd.read(filename)
+    d.append(data)
 
-areas = numpy.zeros(len(files)-1)
-eq_diams = numpy.zeros_like(areas)
-axis_major_lengths = numpy.zeros_like(areas)
-axis_minor_lengths = numpy.zeros_like(areas)
+# d[0] = d[0][::8,::8,::8]
+# d[1] = d[1][::8,::8,::8]
 
-for i in tqdm.tqdm(range(1, len(files))):  # ASSUMING FIRST REGION IS THE BOUNDARY
-    data = numpy.load(files[i])
-    vol = data['volume'].astype('uint8')
+props = skimage.measure.regionprops_table(d[0],intensity_image=d[1],spacing=(pixel_size, pixel_size, pixel_size), properties=('area','equivalent_diameter','major_axis_length','minor_axis_length'))
+df = pd.DataFrame(props)
+df = df.drop(index=0) # drop the background
+df['aspect_ratio'] = df['major_axis_length']/df['minor_axis_length']
 
-    regions = skimage.measure.regionprops(vol,spacing=(pixel_size, pixel_size, pixel_size))
-    # print(len(regions))
-    # there should really only be one region...
-#     for j, region in enumerate(regions):
-    # print(f'REGION {j}')
-    areas[i-1] = regions[0]['area']
-    eq_diams[i-1] = regions[0]['equivalent_diameter_area']
-    axis_major_lengths[i-1] = regions[0]['axis_major_length']
-    axis_minor_lengths[i-1] = regions[0]['axis_minor_length']
+def beautify_column_names(df):
+    df.columns = df.columns.str.replace('_', ' ').str.title()
+    return df
 
-jsonlike_print('number_of_particles', len(areas))
-jsonlike_print('mm_per_pixel', pixel_size)
-jsonlike_print('area', areas)
-jsonlike_print('equivalent_diameter', eq_diams)
-jsonlike_print('axis_major_length', axis_major_lengths)
-jsonlike_print('axis_minor_length', axis_minor_lengths)
-jsonlike_print('aspect_ratio', axis_major_lengths/axis_minor_lengths)
+df = beautify_column_names(df)
+
+print(f'Saving data to {outname}')
+df.to_csv(outname, index_label='Particle ID')

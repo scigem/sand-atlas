@@ -1,108 +1,192 @@
 <script src="/assets/js/plotly.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+<style>
+
+.graph {
+    position: relative;
+}
+
+    #xAxisSelect, #yAxisSelect {
+    position: absolute;
+    /* background-color: rgba(255, 255, 255, 0.9); Semi-transparent background */
+    /* border: 1px solid #ccc; */
+    padding: 5px;
+    z-index: 1000;
+    /* font-size: 14px; */
+    width: auto; /* Ensure it auto-sizes based on content */
+    max-width: 200px; /* Constrain the max width */
+    text-align: center;
+    background-color: rgba(0,0,0,0);
+    outline: none; /* Remove the default focus outline */
+}
+
+/* Position the x-axis dropdown */
+#xAxisSelect {
+    bottom: -15px; /* Position above the x-axis label */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Position the y-axis dropdown */
+#yAxisSelect {
+    top: 50%;
+    left: 0px; /* Align near the y-axis label */
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: left center; /* Rotate around its center */
+}
+</style>
 
 <section id="graphs">
     <div class="inner">
-        <!-- <div > -->
-            <div class="graph right" id="2d_scatterplot_{{ include.title }}"></div>
-        <!-- </div> -->
+        <div class="graph left" id="2d_scatterplot_{{ include.title }}">
+            <!-- <label for="xAxisSelect">X-Axis:</label> -->
+            <select id="xAxisSelect"></select>
+            <!-- <label for="yAxisSelect">Y-Axis:</label> -->
+            <select id="yAxisSelect"></select>
+        </div>
     </div>
 </section>
 
 <script>
-    // from https://plotly.com/javascript/2d-density-plots/
-    // console.log(document.getElementsByClassName("graph")[1].offsetWidth)
-    // console.log("HIIII");
-    // console.log({{include}})
-    // console.log([{{include.id}}]);
+    let sand_name = "{{ page.dir }}".split("/")[2];
+    let csv_path = "../../assets/{{page.dir}}/summary.csv";
+    default_x = 2
+    default_y = 5
+    // Global variables to store parsed data and headers
+    let parsedData = [];
+    let headers = [];
 
-    var trace1 = {
-        x: [{{ include.x }}],
-        y: [{{ include.y }}],
-        // ids: [{{ include.id }}],
-        // hovertemplate: '%{id}',
-        mode: 'markers',
-        name: '',
-        marker: {
-            color: 'black',
-            size: 3,
-            opacity: 0.5
-        },
-        type: 'scatter'
-    };
-    var trace2 = {
-        x: [{{ include.x }}],
-        y: [{{ include.y }}],
-        name: 'density',
-        hoverinfo:'skip',                                                                               
-        ncontours: 20,
-        colorscale: 'YlGnBu',
-        reversescale: true,
-        showscale: false,
-        type: 'histogram2dcontour',
-        line: {
-            width:0
+    // Function to fetch and parse CSV using PapaParse
+    Papa.parse(csv_path, {
+        download: true,
+        header: true, // Assumes the first row is a header
+        complete: function(results) {
+            parsedData = results.data;
+            headers = results.meta.fields; // Get the headers (column names)
+
+            // Populate dropdowns with headers
+            populateDropdowns(headers);
+
+            // Initial plot with the first column for x and y
+            updatePlot(headers[default_x], headers[default_y]);
         }
-    };
-    var trace3 = {
-        x: [{{ include.x }}],
-        name: {{ include.x_label }},
-        marker: {color: 'rgb(255,255,255)'},
-        yaxis: 'y2',
-        type: 'histogram'
-    };
-    var trace4 = {
-        y: [{{ include.y }}],
-        name: {{ include.y_label }},
-        marker: {color: 'rgb(255,255,255)'},
-        xaxis: 'x2',
-        type: 'histogram'
-    };
-    var data = [trace1, trace2, trace3, trace4];
-    var layout = {
-    paper_bgcolor: 'rgba(0,0,0,0)',
-    plot_bgcolor: 'rgba(0,0,0,0)',
-    showlegend: false,
-    autosize: true,
-    // width:  0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
-    // height: 0.8*document.getElementsByClassName("graph")[0].parentElement.offsetWidth,
-    margin: {t: 0, r: 0, l:60, b:60},
-    hovermode: 'closest',
-    bargap: 0,
-    font: {
-        family: "Source Sans Pro,Helvetica,sans-serif",
-        size: 16,
-        color: '#FFF'
-    },
-    xaxis: {
-        domain: [0, 0.85],
-        showgrid: false,
-        zeroline: false,
-        title: {{ include.x_label }},
-        // range: [0,1]
-        // type: 'log'
-    },
-    yaxis: {
-        domain: [0, 0.85],
-        showgrid: false,
-        zeroline: false,
-        title: {{ include.y_label }},
-        // type: 'log'
-        // range: [0,1]
-    },
-    xaxis2: {
-        domain: [0.865, 1],
-        showgrid: false,
-        zeroline: false,
-        // type: 'log'
-    },
-    yaxis2: {
-        domain: [0.865, 1],
-        showgrid: false,
-        zeroline: false,
-        // type: 'log'
-    }
-    };
-    var config = {responsive: true}
-    Plotly.newPlot('2d_scatterplot_{{ include.title }}', data, layout, config);
+    });
 
+    // Function to populate the dropdowns
+    function populateDropdowns(headers) {
+        let xAxisSelect = document.getElementById('xAxisSelect');
+        let yAxisSelect = document.getElementById('yAxisSelect');
+
+        headers.forEach(header => {
+            let optionX = document.createElement('option');
+            optionX.text = header;
+            optionX.value = header;
+            xAxisSelect.add(optionX);
+
+            let optionY = document.createElement('option');
+            optionY.text = header;
+            optionY.value = header;
+            yAxisSelect.add(optionY);
+        });
+
+        // Set default values
+        xAxisSelect.value = headers[default_x];
+        yAxisSelect.value = headers[default_y];
+
+        // Add event listeners for dropdown changes
+        xAxisSelect.addEventListener('change', () => updatePlot(xAxisSelect.value, yAxisSelect.value));
+        yAxisSelect.addEventListener('change', () => updatePlot(xAxisSelect.value, yAxisSelect.value));
+    }
+
+    // Function to update the plot based on selected x and y columns
+    function updatePlot(xColumn, yColumn) {
+        let xData = parsedData.map(d => parseFloat(d[xColumn]));
+        let yData = parsedData.map(d => parseFloat(d[yColumn]));
+
+        // Define the traces for the Plotly graph
+        var trace1 = {
+            x: xData,
+            y: yData,
+            mode: 'markers',
+            name: '',
+            marker: {
+                color: 'black',
+                size: 3,
+                opacity: 0.5
+            },
+            type: 'scatter'
+        };
+        var trace2 = {
+            x: xData,
+            y: yData,
+            name: 'density',
+            hoverinfo: 'skip',
+            ncontours: 20,
+            colorscale: 'YlGnBu',
+            reversescale: true,
+            showscale: false,
+            type: 'histogram2dcontour',
+            line: {
+                width: 0
+            }
+        };
+        var trace3 = {
+            x: xData,
+            name: xColumn,
+            marker: { color: 'rgb(255,255,255)' },
+            yaxis: 'y2',
+            type: 'histogram'
+        };
+        var trace4 = {
+            y: yData,
+            name: yColumn,
+            marker: { color: 'rgb(255,255,255)' },
+            xaxis: 'x2',
+            type: 'histogram'
+        };
+
+        // Create the data array and layout for Plotly
+        var plotData = [trace1, trace2, trace3, trace4];
+        var layout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            showlegend: false,
+            autosize: true,
+            margin: { t: 0, r: 0, l: 60, b: 60 },
+            hovermode: 'closest',
+            bargap: 0,
+            font: {
+                family: "Source Sans Pro,Helvetica,sans-serif",
+                size: 16,
+                color: '#FFF'
+            },
+            xaxis: {
+                domain: [0, 0.85],
+                showgrid: false,
+                zeroline: false,
+                // title: xColumn,
+            },
+            yaxis: {
+                domain: [0, 0.85],
+                showgrid: false,
+                zeroline: false,
+                // title: yColumn,
+            },
+            xaxis2: {
+                domain: [0.865, 1],
+                showgrid: false,
+                zeroline: false,
+            },
+            yaxis2: {
+                domain: [0.865, 1],
+                showgrid: false,
+                zeroline: false,
+            }
+        };
+
+        // Plot using Plotly
+        var config = { responsive: true };
+        Plotly.newPlot('2d_scatterplot_{{ include.title }}', plotData, layout, config);
+    }
 </script>

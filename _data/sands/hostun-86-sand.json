@@ -1,0 +1,11 @@
+{
+    "title": "Hostun sand",
+    "description": "An angular quartz sand",
+    "image": "assets/sands/hostun-86-sand/hostun.jpg",
+    "contributor": "<a href='https://scholar.google.com/citations?user=h-57EAgAAAAJ'>Max Wiebicke</a>",
+    "lat_lon": "45.0384521,5.197219",
+    "publication_url": "https://iopscience.iop.org/article/10.1088/1361-6501/aa8dbf",
+    "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
+    "number_of_particles": 53,
+    "microns_per_pixel": 1.0
+}

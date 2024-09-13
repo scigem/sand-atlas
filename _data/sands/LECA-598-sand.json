@@ -1,0 +1,10 @@
+{
+    "title": "LECA",
+    "description": "Lightweight expanded clay aggregate",
+    "image": "assets/sands/LECA-598-sand/LecaLaterlite_0.125_0.250m_100xBSE_023.png",
+    "contributor": "Giulia Guida",
+    "publication_url": "https://www.icevirtuallibrary.com/doi/10.1680/jgele.18.00035",
+    "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
+    "number_of_particles": 598,
+    "microns_per_pixel": 10.75
+}

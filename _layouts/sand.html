@@ -25,7 +25,6 @@
 		let style = document.getElementById('banner').style;
 		style.backgroundImage = 'url("{{ site.baseurl }}/{{ page.data.image }}")';
 		style.height = '20vh';
-
 	</script>
 
 	<!-- Main -->
@@ -41,7 +40,7 @@
 				{% endif %}
 
 				{% include 2d_scatterplot.html title=page.data.title x=page.data.equivalent_diameter
-				y=page.data.aspect_ratio id=page.data.id x_label='"Equivalent diameter (mm)"' y_label='"Aspect ratio (-)"'
+				y=page.data.aspect_ratio id=page.data.id x_label='Equivalent diameter (m)' y_label='Aspect ratio (-)'
 				%}
 			</div>
 
@@ -52,16 +51,19 @@
 		<div class="inner">
 			<p>
 				The meshed data is available in five different qualities. Original indicates that the mesh resolution is the same as the original voxel data. Numerical values of mesh quality indicate the approximate number of facets across the smallest dimension of the particle. You can view the different meshes above and change between them. Meshes are available as STL files below. Level set data is available in the open standard VDB.
-				{% if page.data.publication_url %}This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>.{% endif %}
-				{% if page.data.source_data_url %}You can find the <a href="{{ page.data.source_data_url }}">original data
-					here</a>. {% endif %}
-				For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.mm_per_pixel}} mm. <!-- that you can <a href="{{ page.data.download_url }}">download here</a>. -->
+
+				{% if page.data.publication_url %}<p>This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>.</p>{% endif %}
+				{% if page.data.source_data_url %}<p>You can find the <a href="{{ page.data.source_data_url }}">original data
+					here</a>.</p>{% endif %}
+				<p>For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.microns_per_pixel}} microns. You can download a <a href="../../assets{{page.dir}}summary.csv">list of per-particle shape descriptors here</a>.</p>
+				
 				{% include dropdown.html sand=page.dir %}
 			</p>
 			<p>
 				{% if page.data.source_license %}Source data is licensed under: {{ page.data.source_license }}{% endif %}
 				<br>
 				This derivative data is licensed under: <a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>
+				{% if page.data.image_source_url %}<br><a href='{{ page.data.image_source_url }}'>Image source</a>{% endif %}
 				{% if page.data.contributor %}<br>Contributor: {{ page.data.contributor }}{% endif %}
 			</p>
 		</div>
