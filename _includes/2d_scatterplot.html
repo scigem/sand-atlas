@@ -2,39 +2,44 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
 <style>
+    .graph {
+        position: relative;
+    }
 
-.graph {
-    position: relative;
-}
+    #xAxisSelect,
+    #yAxisSelect {
+        position: absolute;
+        /* background-color: rgba(255, 255, 255, 0.9); Semi-transparent background */
+        /* border: 1px solid #ccc; */
+        padding: 5px;
+        z-index: 1000;
+        /* font-size: 14px; */
+        width: auto;
+        /* Ensure it auto-sizes based on content */
 
-    #xAxisSelect, #yAxisSelect {
-    position: absolute;
-    /* background-color: rgba(255, 255, 255, 0.9); Semi-transparent background */
-    /* border: 1px solid #ccc; */
-    padding: 5px;
-    z-index: 1000;
-    /* font-size: 14px; */
-    width: auto; /* Ensure it auto-sizes based on content */
-    max-width: 200px; /* Constrain the max width */
-    text-align: center;
-    background-color: rgba(0,0,0,0);
-    outline: none; /* Remove the default focus outline */
-}
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0);
+        outline: none;
+        /* Remove the default focus outline */
+    }
 
-/* Position the x-axis dropdown */
-#xAxisSelect {
-    bottom: -15px; /* Position above the x-axis label */
-    left: 50%;
-    transform: translateX(-50%);
-}
+    /* Position the x-axis dropdown */
+    #xAxisSelect {
+        bottom: -15px;
+        /* Position above the x-axis label */
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-/* Position the y-axis dropdown */
-#yAxisSelect {
-    top: 50%;
-    left: 0px; /* Align near the y-axis label */
-    transform: translateY(-50%) rotate(-90deg);
-    transform-origin: left center; /* Rotate around its center */
-}
+    /* Position the y-axis dropdown */
+    #yAxisSelect {
+        top: 50%;
+        left: 0px;
+        /* Align near the y-axis label */
+        transform: translateY(-50%) rotate(-90deg);
+        transform-origin: left center;
+        /* Rotate around its center */
+    }
 </style>
 
 <section id="graphs">
@@ -61,7 +66,7 @@
     Papa.parse(csv_path, {
         download: true,
         header: true, // Assumes the first row is a header
-        complete: function(results) {
+        complete: function (results) {
             parsedData = results.data;
             headers = results.meta.fields; // Get the headers (column names)
 
