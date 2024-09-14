@@ -1,4 +1,4 @@
-Particle ID,Area (micron<sup>2</sup>),Equivalent Diameter (micron),Major Axis Length (micron),Minor Axis Length (micron),Aspect Ratio
+Particle ID,Volume (µm³),Equivalent Diameter (µm),Major Axis Length (µm),Minor Axis Length (µm),Aspect Ratio
 0,834605.0,116.81379139840416,275.68862200823804,41.47980250785657,6.646334006918685
 1,222908.0,75.2273351479781,139.9630432792804,52.110584262881915,2.6858851279273668
 2,449910.0,95.06974768486134,167.29200162126526,44.99847337433591,3.7177261599429574
