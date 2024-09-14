@@ -1,0 +1,11 @@
+{
+    "title": "Caicos Ooids",
+    "description": "Rounded calcitic grains",
+    "lat_lon": "21.75,-71.583333",
+    "contributor": "<a href='https://scholar.google.com/citations?user=h-57EAgAAAAJ'>Max Wiebicke</a>",
+    "image": "assets/sands/caicos-117-sand/ooid.jpg",
+    "image_source_url" : "https://www.flickr.com/photos/158641594@N04/40228350952",
+    "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
+    "number_of_particles": "117",
+    "microns_per_pixel": "1"
+}

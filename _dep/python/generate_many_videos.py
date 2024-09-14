@@ -1,12 +1,13 @@
 import os
 import sys
 import glob
-import json
+
+# import json
 import numpy
 import matplotlib.image
 from tqdm import tqdm
 
-font = os.path.expanduser("~/Library/Fonts/Montserrat-Medium.ttf")
+# font = os.path.expanduser("~/Library/Fonts/Montserrat-Medium.ttf")
 # debug = True
 debug = False
 if debug:
@@ -44,10 +45,14 @@ files.sort()
 #     json_data = json.load(f)
 # ids = json_data["id"].replace("'", "").split(", ")
 
-#==== Changed here to render less particles
+# ==== Changed here to render less particles
 start_index = 0  # Specify the index to start rendering from
-max_files = min(72, len(files) - start_index)  # Calculate max_files based on start_index
-for i, file in tqdm(enumerate(files[start_index:start_index + max_files]), total=max_files):  # Adjusted range to max_files
+max_files = min(
+    72, len(files) - start_index
+)  # Calculate max_files based on start_index
+for i, file in tqdm(
+    enumerate(files[start_index : start_index + max_files]), total=max_files
+):  # Adjusted range to max_files
     if not os.path.exists(file[:-4] + ".webm"):
         # Use blender to render an animation of this grain rotating
         os.system(
@@ -76,8 +81,10 @@ for i, file in tqdm(enumerate(files[start_index:start_index + max_files]), total
 print("Stitching videos together...")
 files = glob.glob(foldername + "/stl_ORIGINAL/*.webm")
 files.sort()
-num_particles = min(72, len(files))  #==== Changed here to limit to 72 particles
-num_grids = int(numpy.ceil(num_particles / 12))  # Adjusted for a maximum of 72 particles
+num_particles = min(72, len(files))  # ==== Changed here to limit to 72 particles
+num_grids = int(
+    numpy.ceil(num_particles / 12)
+)  # Adjusted for a maximum of 72 particles
 
 for i in range(num_particles, num_grids * 12):  # pad with blank videos
     files.append("blank.webm")
@@ -113,7 +120,12 @@ if not os.path.exists(foldername + "/upload"):
     os.makedirs(foldername + "/upload")
 
 print("    Reducing file size...")
-os.system("ffmpeg -y -i all_particles.webm -crf 45 "+ foldername+"/upload/all_particles.webm" + silence)
+os.system(
+    "ffmpeg -y -i all_particles.webm -crf 45 "
+    + foldername
+    + "/upload/all_particles.webm"
+    + silence
+)
 
 # Make zips for uploading
 print("    Making zips...")
@@ -145,4 +157,5 @@ if not debug:
 
 
 os.system(
-    f"mv all_particles_smaller.webm ~/code/sand-atlas/assets/sands/{sand_type}-sand/all_particles.webm")
+    f"mv all_particles_smaller.webm ~/code/sand-atlas/assets/sands/{sand_type}-sand/all_particles.webm"
+)
