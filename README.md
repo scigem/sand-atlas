@@ -13,8 +13,12 @@ If you would like to help us improve the Sand Atlas, you should:
 3. In the terminal, inside the package folder run `bundle install`. This will install the requried packages so that we can build the website.
 4. To run a local server to be able to see the Sand Atlas, run `bundle exec jekyll serve`. Open the browser to `http://localhost:4000/` to see the website.
 
-## Processing pipeline
-The scripts to convert a user submitted labelled `tiff` file are stored in the `python` folder. The master script, which calls the other scripts sequentially, is `generate_many_videos.py`. This can be run with `python generate_many_videos.py path_to_labelled_tiff name_of_sand`. This will produce meshes of all the files and videos of those meshes rotating.
+## Processing and accessing data
+The code used to process and access data is available via
+
+```pip install sand-atlas```
+
+You can access the code itself and documentation [here](https://github.com/scigem/sand-atlas-python).
 
 ## User submissions
 When someone wants to give us data, they start off with either a direct email or by filling out the web form on the homepage of the Sand Atlas. From there:
@@ -28,8 +32,9 @@ When someone wants to give us data, they start off with either a direct email or
     7. Source license (if source data already licensed). If not previously licensed, we recommend [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
     8. Mineralogy
     9. Resolution (mm per voxel)
-10. Once received, we download the tiffs
-11. Convert labelled image to meshes
-12. Use blender to render each mesh to a video
-13. Host meshes and videos at a server https://data.scigem-eng.sydney.edu.au/
-14. Put all of this information into the sand atlas (metadata is stored in a json file at `_data/sands/`) and push to the repository to update the website.
+2. Once received, we download the tiffs
+3. The following is performed using the `sand-atlas` pip package:
+    1. Use openvdb (inside blender) to convert labelled image to meshes
+    2. Use blender to render each mesh to a video
+4. We then host the meshes and videos on our server at `https://data.scigem-eng.sydney.edu.au/`.
+5. Put all of this information into the sand atlas (metadata is stored in a json file at `_data/sands/`) and push to the repository to update the website.
