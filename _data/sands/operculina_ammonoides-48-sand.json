@@ -7,5 +7,5 @@
     "publication_url": "https://www.nature.com/articles/s41597-024-03476-w/",
     "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
     "number_of_particles": "48",
-    "microns_per_pixel": "15"    
+    "microns_per_pixel": 15
 }
