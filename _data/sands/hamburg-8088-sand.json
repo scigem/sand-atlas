@@ -1,0 +1,12 @@
+{
+    "title": "Hamburg sand",
+    "description": "A quartz quarry sand",
+    "lat_lon": "53.5876257,9.4036267",
+    "contributor": "<a href='https://www.epv.uni-hannover.de/en/staff-search/staff-member-details/person/marius-milatz'>Marius Milatz</a>",
+    "publication_url": "https://link.springer.com/article/10.1007/s11440-021-01315-5",
+    "image": "assets/sands/hamburg-8088-sand/microscopy.jpg",
+    "image_source_url" : "https://tore.tuhh.de/entities/publication/31a30616-858c-487e-acc7-042d2180abf9",
+    "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
+    "number_of_particles": "8088",
+    "microns_per_pixel": "11"
+}

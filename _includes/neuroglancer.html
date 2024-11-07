@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuroglancer Viewer</title>
+    <style>
+        #stl-viewer {
+            /* width: 100%; */
+            /* height: 80vh; */
+            /* border: 1px solid #ccc; */
+        }
+    </style>
+    <script src=""></script>
+    <script type="module" src="{% link assets/js/neuroglancer/main.83e65fbec24c7cd74ee9.js %}"></script>
+</head>
+<body>
+    <div id="stl-viewer"></div>
+
+    <!-- <script type="text/javascript">
+        // Make sure the Neuroglancer script is fully loaded
+        window.addEventListener('load', function() {
+            // Ensure neuroglancer is defined
+            // console.log(neuroglancer)
+            // if (typeof neuroglancer !== 'undefined') {
+                // Create Neuroglancer viewer
+                const viewer = new Viewer({
+                    // Attach Neuroglancer viewer to a div
+                    container: document.getElementById('stl-viewer'),
+                });
+
+                // Add a precomputed layer
+                viewer.addLayer({
+                    type: 'segmentation',
+                    source: `precomputed://https://data.scigem-eng.sydney.edu.au/sand-atlas/sands/operculina_ammonoides-48-sand/neuroglancer/`,
+                });
+
+                // Optional: Set initial viewer settings (e.g., position, zoom)
+                viewer.navigation.position.spatialCoordinates = [128, 128, 50];  // Adjust to fit your volume
+                viewer.navigation.zoomFactor = 2.0;
+            // } else {
+            //     console.error("Neuroglancer is not defined. Please check the Neuroglancer CDN.");
+            // }
+        });
+    </script> -->
+</body>
+</html>
