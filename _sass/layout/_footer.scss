@@ -28,6 +28,11 @@
 		}
 	}
 
+	.footer-right {
+		text-align: right;
+		margin-top: calc(-1em - 100px);
+	}
+
 	@include breakpoint(xsmall) {
 		.copyright {
 			li {
