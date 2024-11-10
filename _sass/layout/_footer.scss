@@ -31,6 +31,10 @@
 	.footer-right {
 		text-align: right;
 		margin-top: calc(-1em - 100px);
+		object { 
+			margin-right:-25px;
+			transform: scale(0.75);
+		}
 	}
 
 	@include breakpoint(xsmall) {

@@ -12,31 +12,27 @@
   <div id="main" class="alt">
 
     <!-- One -->
-    <section id="one">
-      <div class="inner">
         {% for page in site.pages %}
           {% assign path = page.dir | slice: 1, 5 %}
           {% if path == 'sands' %}
             {% if page.title != 404 %}
+            <section id="{{page.title}}">
+            <div class="inner">
               <header class="major">
                 <h1><a href={{page.url}}>{{ page.title }}</a></h1>
               </header>
-          <!-- {% if post.date %}<p>{{ post.date }}</p>{% endif %} -->
-              <!-- <p><a href="{{ page.url }}">{{ page.description }}</a></p> -->
-              <!-- <p>{{ page.content }}</p> -->
-              {% if page.data.image %}<div class="image right"><img src="{{ site.baseurl }}/{{ page.data.image }}" alt=""
-                class="sand-thumbnail" /></div>{% endif %}
-            {% if page.data.lat_lon %}<iframe loading="lazy" allowfullscreen class="map right"
-              src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.data.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>{%
-            endif %}
-    
-            {% include 2d_scatterplot.html title=page.data.title x=page.data.equivalent_diameter y=page.data.aspect_ratio id=page.data.id x_label='"Equivalent diameter (mm)"' y_label='"Aspect ratio (-)"' %}
-            {{ content }}
+              
+              <p><a href="{{ page.url }}">{{ page.description }}</a></p>
+              {% if page.data.image %}
+                <div class="image all_sands">
+                  <img src="{{ site.baseurl }}/{{ page.data.image }}" alt="" class="sand-thumbnail" />
+                </div>
+              {% endif %}
+            </div>
+          </section>
             {% endif %}
           {% endif %}
         {% endfor %}
-      </div>
-    </section>
 
   </div>
 

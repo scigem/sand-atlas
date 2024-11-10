@@ -26,6 +26,14 @@ img {
 		display: block;
 	}
 
+	&.all_sands {
+		max-width: 500px;
+		img {
+			width: 100%;
+		}
+		margin: 0;
+	}
+
 	&.left,
 	&.right {
 		max-width: 30%;
