@@ -105,7 +105,7 @@
         // Extract the latitude and longitude
         let lon = reversedParts[0];
         let lat = reversedParts[1];
-        console.log("Adding billboard for {{ page.title }} at lat: " + lat + ", lon: " + lon);
+        //console.log("Adding billboard for {{ page.title }} at lat: " + lat + ", lon: " + lon);
         viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(lon, lat),
             billboard: {

@@ -2,6 +2,7 @@
 title: The Sand Atlas
 email: benjy.marks@sydney.edu.au
 description: 3D models of lots of particles.
+tagline: 3D models of lots of particles
 baseurl: "" # the subpath of your site, e.g. /blog
 url: https://sand-atlas.scigem.com # the base hostname & protocol for your site
 author: Benjy Marks
@@ -10,10 +11,12 @@ city: Sydney
 state: NSW
 zip_code: 2006
 country: Australia
+logo: /assets/images/favicon.png
+publisher: The University of Sydney
 
 # homepage tiles
 tiles-source: pages # accepts "posts" or "pages"
-tiles-count: 12
+tiles-count: 48
 
 # social settings (key must match name of font awesome icon)
 # see https://fontawesome.com/icons?d=gallery&p=2&s=brands
@@ -53,3 +56,4 @@ google_analytics: G-H3CZGKG5YZ
 
 plugins:
   - jekyll-sitemap
+  - jekyll-seo-tag
