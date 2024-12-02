@@ -5,8 +5,7 @@
 			{% for key_value in site.socials %}
 			{% if key_value[1] %}
 			<li>
-				<a href="{{ key_value[1] }}" class="icon alt fa-{{ key_value[0] | downcase }}" target="_blank"
-					rel="noopener noreferrer" aria-label="{{ key_value[0] }}">
+				<a href="{{ key_value[1] }}" class="icon alt fa-{{ key_value[0] | downcase }}" target="_blank" rel="noopener noreferrer" aria-label="{{ key_value[0] }}">
 					<span class="label">{{ key_value[0] }}</span>
 				</a>
 			</li>
@@ -17,7 +16,7 @@
 		<div class="footer-right">
 			<!-- <object type="image/svg+xml" data="https://www.re3data.org/public/badges/s/dark/100014502.svg"><img src="https://www.re3data.org/public/badges/s/dark/100014502.svg" style="max-width:100%"></object></p> -->
 			<object type="image/svg+xml" data="assets/images/re3data.svg" style="max-width:100%">
-			 <img src="assets/images/re3data.svg" alt="re3data" style="max-width:100%">
+				<img src="{{ 'assets/images/re3data.svg' | absolute_url }}" alt="re3data" style="max-width:100%">
 			</object>
 		</div>
 	</div>
