@@ -3,7 +3,7 @@ module SandPlugin
       safe true
   
       def generate(site)
-        site.data['sands'].each do |page|
+        site.data['json'].each do |page|
           site.pages << SandPage.new(site, page)
         end
       end

@@ -2,7 +2,7 @@
     "title": "Coffee",
     "description": "An edible grain",
     "contributor": "<a href='https://scholar.google.com/citations?user=LbHDC7UAAAAJ'>Bratislav Lukic</a>",
-    "image": "assets/sands/coffee-1-sand/coffee.jpg",
+    "image": "assets/images/coffee.jpg",
     "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
     "number_of_particles": "1",
     "microns_per_pixel": "0.8"

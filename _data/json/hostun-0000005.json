@@ -1,7 +1,7 @@
 {
     "title": "Hostun sand",
     "description": "An angular quartz sand",
-    "image": "assets/sands/hostun-86-sand/hostun.jpg",
+    "image": "assets/images/hostun.jpg",
     "contributor": "<a href='https://scholar.google.com/citations?user=h-57EAgAAAAJ'>Max Wiebicke</a>",
     "lat_lon": "45.0384521,5.197219",
     "publication_url": "https://iopscience.iop.org/article/10.1088/1361-6501/aa8dbf",

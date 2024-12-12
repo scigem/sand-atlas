@@ -56,7 +56,7 @@
 				{% if page.data.publication_url %}<p>This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>.</p>{% endif %}
 				{% if page.data.source_data_url %}<p>You can find the <a href="{{ page.data.source_data_url }}">original data
 					here</a>.</p>{% endif %}
-				<p>For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.microns_per_pixel}} microns. You can download a <a href="../../assets{{page.dir}}summary.csv">list of per-particle shape descriptors here</a>.</p>
+				<p>For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.microns_per_pixel}} microns. You can download a <a href="../../_data/csv/{{page.dir}}.csv">list of per-particle shape descriptors here</a>.</p>
 				
 				{% include dropdown.html sand=page.dir %}
 			</p>

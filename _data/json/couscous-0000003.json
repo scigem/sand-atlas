@@ -2,7 +2,7 @@
     "title": "Couscous",
     "description": "An edible grain",
     "contributor": "<a href='https://orcid.org/0000-0003-4426-3382'>Ilija Vego</a>",
-    "image": "assets/sands/couscous-81-sand/couscous.png",
+    "image": "assets/images/couscous.png",
     "publication_url": "https://hal.science/tel-04360890/",
     "source_license": "<a href='https://creativecommons.org/licenses/by/4.0/'><img src='https://img.shields.io/badge/License-CC_BY_4.0-green.svg' alt='License: CC BY 4.0'></img></a>",
     "number_of_particles": "81",
