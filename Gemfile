@@ -7,7 +7,7 @@ group :jekyll_plugins do
 end
 
 gem "webrick", "~> 1.7"
-gem "jekyll-sass-converter", "~> 2.0"
+gem "jekyll-sass-converter", "~> 2.2.0"
 gem 'csv', '~> 3.0'
 gem 'bigdecimal', '~> 3.0'
 gem 'base64', '~> 0.2.0'

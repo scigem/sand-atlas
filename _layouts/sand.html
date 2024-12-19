@@ -31,7 +31,7 @@
 	<div id="main" class="alt">
 		<section id="graphs" style="height:500px;">
 			<div class="inner">
-				
+
 				<div class="graph right" id="stl-viewer">{% include stl_viewer.html %}
 					<div style="user-select: none;position:absolute;bottom:0;left:0">Drag to look around.</div>
 				</div>
@@ -53,12 +53,13 @@
 			<p>
 				The meshed data is available in five different qualities. Original indicates that the mesh resolution is the same as the original voxel data. Numerical values of mesh quality indicate the approximate number of facets across the smallest dimension of the particle. You can view the different meshes above and change between them. Meshes are available as STL files below. Level set data is available in the open standard VDB.
 
-				{% if page.data.publication_url %}<p>This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>.</p>{% endif %}
-				{% if page.data.source_data_url %}<p>You can find the <a href="{{ page.data.source_data_url }}">original data
+				{% if page.data.publication_url %}
+			<p>This data was originally reported in <a href="{{ page.data.publication_url }}">this publication</a>.</p>{% endif %}
+			{% if page.data.source_data_url %}<p>You can find the <a href="{{ page.data.source_data_url }}">original data
 					here</a>.</p>{% endif %}
-				<p>For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.microns_per_pixel}} microns. You can download a <a href="../../_data/csv/{{page.dir}}.csv">list of per-particle shape descriptors here</a>.</p>
-				
-				{% include dropdown.html sand=page.dir %}
+			<p>For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.microns_per_pixel}} microns. You can download a <a href="../../_data/csv/{{page.dir}}.csv">list of per-particle shape descriptors here</a>.</p>
+
+			{% include dropdown.html sand=page.dir %}
 			</p>
 			<p>
 				{% if page.data.source_license %}Source data is licensed under: {{ page.data.source_license }}{% endif %}
