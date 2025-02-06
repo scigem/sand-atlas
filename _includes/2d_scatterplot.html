@@ -56,8 +56,8 @@
 <script>
     let sand_name = "{{ page.dir }}".split("/")[2];
     let csv_path = "../../assets/sands/"+ sand_name + ".csv";
-    default_x = 2
-    default_y = 5
+    default_x = 8; // flatness
+    default_y = 9; // elongation
     // Global variables to store parsed data and headers
     let parsedData = [];
     let headers = [];
@@ -106,8 +106,11 @@
 
     // Function to update the plot based on selected x and y columns
     function updatePlot(xColumn, yColumn) {
+        let IDs = parsedData.map(d => "Particle " + d['Particle ID']);
         let xData = parsedData.map(d => parseFloat(d[xColumn]));
         let yData = parsedData.map(d => parseFloat(d[yColumn]));
+        // console.log(IDs)
+        // console.log(parsedData)
 
         // Define the traces for the Plotly graph
         var trace1 = {
@@ -120,6 +123,8 @@
                 size: 3,
                 opacity: 0.5
             },
+            text: IDs,
+            hoverinfo: 'text', // Show the ID on hover
             type: 'scatter'
         };
         var trace2 = {

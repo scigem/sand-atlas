@@ -1,2 +1,2 @@
-Particle ID,Volume (µm³),Equivalent Diameter (µm),Major Axis Length (µm),Minor Axis Length (µm),Aspect Ratio
-0,276949368.8320001,808.7244733893174,1564.9631071001054,621.73536452807,2.5170887750417656
+Particle ID,Volume (µm³),Equivalent Diameter (µm),Major Axis Length (µm),Middle Axis Length (µm),Minor Axis Length (µm),True Sphericity (-),Convexity (-),Flatness (-),Elongation (-),Compactness (-)
+1,353087520.76800007,876.9225715142904,1336.3680794940096,943.9802816854676,534.5578727160278,0.16472774744033813,0.6949373436687387,0.5662807614599533,0.7063774540640688,0.004469926003366709
