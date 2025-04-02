@@ -9,6 +9,8 @@
 {% include head.html %}
 
 <body>
+	<link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
 
 	{% include header.html %}
 
@@ -37,7 +39,7 @@
 				</div>
 
 				{% if page.data.lat_lon %}
-				<iframe loading="lazy" allowfullscreen class="map right" src="https://www.google.com/maps/embed/v1/view?zoom=15&center={{ page.data.lat_lon }}&key=AIzaSyDNy6kpukOHDgkDmK2vYCrRlXPkcWhOag4"></iframe>
+					<div id="map" class="graph right"></div>
 				{% endif %}
 
 				{% include 2d_scatterplot.html title=page.data.title x=page.data.equivalent_diameter
@@ -115,6 +117,26 @@
 
 
 	{% include footer.html %}
+	
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuanltYXJrcyIsImEiOiJjbTh6NWpsOTQwOGFsMnFwbjJnYXRoaW04In0.EWE1-y1tpFrembO739k03A';
+		let lat_lon = [{{ page.data.lat_lon }}];
+		let center = [parseFloat(lat_lon[1]), parseFloat( lat_lon[0])];
+
+		const map = new mapboxgl.Map({
+			container: 'map', // container ID
+			center: center, // starting position [lng, lat]. Note that lat must be set between -90 and 90
+			zoom: 15, // starting zoom
+			style: 'mapbox://styles/mapbox/dark-v11', // style URL
+			logo : false,
+		});
+
+		const marker1 = new mapboxgl.Marker({
+			color : '#cccccc'
+		})
+        .setLngLat(center)
+        .addTo(map);
+	</script>
 
 </body>
 
