@@ -1,0 +1,184 @@
+name: Link Checker
+
+on:
+  schedule:
+    # Run weekly on Sundays at 02:00 UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+          cache-version: 0
+          
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install link checking dependencies
+        run: |
+          npm install -g broken-link-checker
+          python3 -m pip install requests
+          
+      - name: Run unified link checker
+        run: |
+          python3 scripts/check_links.py \
+            --ci-mode \
+            --max-sand-types 5 \
+            --output both \
+            --output-dir .
+            
+      - name: Upload link check results
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-check-results
+          path: |
+            link_check_results.json
+            link_check_report.md
+            github_issue.md
+            
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              const report = fs.readFileSync('link_check_report.md', 'utf8');
+              
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `## 🔗 Link Check Results\n\n${report}`
+              });
+            } catch (error) {
+              console.log('Could not read report file:', error);
+            }
+            
+      - name: Create Issue on Failure
+        if: failure() && github.event_name == 'schedule'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              // Try to read the GitHub issue content first
+              let issueBody;
+              try {
+                issueBody = fs.readFileSync('github_issue.md', 'utf8');
+              } catch {
+                // Fallback to report
+                const report = fs.readFileSync('link_check_report.md', 'utf8');
+                issueBody = `Automated link check found issues.\n\n${report}`;
+              }
+              
+              const results = JSON.parse(fs.readFileSync('link_check_results.json', 'utf8'));
+              const brokenCount = results.summary.total_broken || 0;
+              
+              if (brokenCount > 0) {
+                await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: `🔗 Link Check: ${brokenCount} broken links found`,
+                  body: issueBody,
+                  labels: ['bug', 'automated', 'links']
+                });
+              }
+            } catch (error) {
+              console.log('Could not create issue:', error);
+              
+              // Create a basic issue anyway
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🔗 Link Check Failed',
+                body: 'The automated link check workflow failed. Please check the workflow logs.',
+                labels: ['bug', 'automated', 'links']
+              });
+            }
+          
+      - name: Upload link check results
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-check-results
+          path: |
+            link_check_results.json
+            link_check_report.md
+            
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              const report = fs.readFileSync('link_check_report.md', 'utf8');
+              
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `## 🔗 Link Check Results\n\n${report}`
+              });
+            } catch (error) {
+              console.log('Could not read report file:', error);
+            }
+            
+      - name: Create Issue on Failure
+        if: failure() && github.event_name == 'schedule'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              const results = JSON.parse(fs.readFileSync('link_check_results.json', 'utf8'));
+              const report = fs.readFileSync('link_check_report.md', 'utf8');
+              
+              const brokenCount = results.hosted_data_links.broken.length;
+              
+              if (brokenCount > 0) {
+                await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: `🔗 Link Check: ${brokenCount} broken hosted data links found`,
+                  body: `Automated link check found ${brokenCount} broken hosted data links.\n\n${report}`,
+                  labels: ['bug', 'automated', 'links']
+                });
+              }
+            } catch (error) {
+              console.log('Could not create issue:', error);
+              
+              // Create a basic issue anyway
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🔗 Link Check Failed',
+                body: 'The automated link check workflow failed. Please check the workflow logs.',
+                labels: ['bug', 'automated', 'links']
+              });
+            }

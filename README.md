@@ -13,6 +13,29 @@ If you would like to help us improve the Sand Atlas, you should:
 3. In the terminal, inside the package folder run `bundle install`. This will install the requried packages so that we can build the website.
 4. To run a local server to be able to see the Sand Atlas, run `bundle exec jekyll serve`. Open the browser to `http://localhost:4000/` to see the website.
 
+## Link Checking
+
+The Sand Atlas includes an automated link checking system to monitor the availability of hosted data files and external links:
+
+### Quick Check (Development)
+```bash
+./scripts/run_link_check.sh --quick
+```
+
+### Full Check
+```bash
+./scripts/run_link_check.sh
+```
+
+The link checker:
+- 🔍 Automatically detects download patterns from the dropdown
+- 📊 Checks hosted data availability on `data.scigem-eng.sydney.edu.au`
+- 🌐 Validates external links
+- 📝 Generates detailed reports
+- 🤖 Runs automatically via GitHub Actions
+
+For detailed usage and configuration, see [`scripts/README.md`](scripts/README.md).
+
 ## Processing and accessing data
 The code used to process and access data is available via
 
