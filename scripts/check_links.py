@@ -27,10 +27,18 @@ import argparse
 import urllib.parse
 from pathlib import Path
 from collections import defaultdict
-import requests
 import time
 import sys
 import subprocess
+
+# Try to import requests, but make it optional
+try:
+    import requests
+    HAS_REQUESTS = True
+except ImportError:
+    HAS_REQUESTS = False
+    print("⚠️ requests library not available - some features will be disabled")
+    print("💡 Install with: pip install requests")
 
 class SandAtlasLinkChecker:
     def __init__(self, site_dir="_site", quick_mode=False, ci_mode=False, max_sand_types=None):
@@ -156,6 +164,10 @@ class SandAtlasLinkChecker:
         
     def check_hosted_data_links(self, patterns):
         """Check availability of hosted data files for each sand type"""
+        if not HAS_REQUESTS:
+            print("⚠️ Skipping hosted data link checking - requests library not available")
+            return
+            
         sand_ids = self.get_sand_ids()
         
         if not sand_ids:
@@ -224,6 +236,10 @@ class SandAtlasLinkChecker:
         
     def check_sample_external_links(self):
         """Check a sample of external links from the built site"""
+        if not HAS_REQUESTS:
+            print("⚠️ Skipping external link checking - requests library not available")
+            return
+            
         if not self.site_dir.exists():
             print(f"⚠️ Site directory {self.site_dir} not found. Run 'bundle exec jekyll build' first.")
             return
@@ -653,98 +669,195 @@ self.hosted_data_patterns = [
         print("🚀 Starting Sand Atlas link check...")
         print(f"📁 Site directory: {self.site_dir}")
         print(f"⚡ Mode: {'Quick' if self.quick_mode else 'Full'}")
+        print(f"🤖 CI Mode: {self.ci_mode}")
+        print(f"🎯 Max sand types: {self.max_sand_types or 'unlimited'}")
+        
+        # Check dependencies
+        if self.ci_mode:
+            self._check_ci_dependencies()
         
         # Step 1: Find hosted data patterns
         print("\n🔍 Step 1: Finding hosted data patterns...")
-        patterns = self.find_dropdown_patterns()
+        try:
+            patterns = self.find_dropdown_patterns()
+        except Exception as e:
+            print(f"❌ Error finding patterns: {e}")
+            patterns = []
         
         # Step 2: Check hosted data links
         if patterns:
             print("\n📊 Step 2: Checking hosted data availability...")
-            self.check_hosted_data_links(patterns)
+            try:
+                self.check_hosted_data_links(patterns)
+            except Exception as e:
+                print(f"❌ Error checking hosted data: {e}")
         else:
             print("⚠️ No hosted data patterns found!")
             
         # Step 3: Check external links (unless hosted-only mode)
         if not hosted_only:
-            if self.ci_mode:
-                print("\n🌐 Step 3: Checking external links with broken-link-checker...")
-                self.check_external_links_with_blc()
-            else:
-                print("\n🌐 Step 3: Checking sample external links...")
-                self.check_sample_external_links()
+            try:
+                if self.ci_mode:
+                    print("\n🌐 Step 3: Checking external links with broken-link-checker...")
+                    self.check_external_links_with_blc()
+                else:
+                    print("\n🌐 Step 3: Checking sample external links...")
+                    self.check_sample_external_links()
+            except Exception as e:
+                print(f"❌ Error checking external links: {e}")
         
         # Step 4: Check internal links (if in full mode)
         if not self.quick_mode and not hosted_only:
-            print("\n🏠 Step 4: Checking internal links...")
-            self.check_internal_links()
-        
+            try:
+                print("\n🏠 Step 4: Checking internal links...")
+                self.check_internal_links()
+            except Exception as e:
+                print(f"❌ Error checking internal links: {e}")
+
         # Step 5: Generate summary and report
         print("\n📋 Step 5: Generating report...")
-        self.generate_summary()
+        try:
+            self.generate_summary()
+        except Exception as e:
+            print(f"❌ Error generating summary: {e}")
         
         print("\n✅ Link check complete!")
         return self.results
+        
+    def _check_ci_dependencies(self):
+        """Check if CI dependencies are available"""
+        print("🔧 Checking CI dependencies...")
+        
+        # Check for requests
+        try:
+            import requests
+            print("   ✅ requests library available")
+        except ImportError:
+            print("   ❌ requests library not found")
+            print("   📦 Install with: pip install requests")
+            
+        # Check for broken-link-checker
+        try:
+            import subprocess
+            result = subprocess.run(['which', 'blc'], capture_output=True, text=True)
+            if result.returncode == 0:
+                print("   ✅ broken-link-checker available")
+            else:
+                print("   ⚠️ broken-link-checker not found")
+                print("   📦 Install with: npm install -g broken-link-checker")
+        except Exception:
+            print("   ⚠️ Could not check for broken-link-checker")
+
 
 def main():
-    parser = argparse.ArgumentParser(description="Check links in the Sand Atlas website")
-    parser.add_argument("--site-dir", default="_site", help="Built Jekyll site directory")
-    parser.add_argument("--quick", action="store_true", help="Quick check with limited samples")
-    parser.add_argument("--hosted-only", action="store_true", help="Check only hosted data links")
-    parser.add_argument("--output", choices=["json", "markdown", "both"], default="both", help="Output format")
-    parser.add_argument("--output-dir", default=".", help="Output directory for results")
-    parser.add_argument("--ci-mode", action="store_true", help="Enable CI mode (optimized for GitHub Actions)")
-    parser.add_argument("--max-sand-types", type=int, help="Limit number of sand types to check")
+    """Main function with argument parsing"""
+    print("🔗 Sand Atlas Link Checker")
+    print("=" * 50)
+    
+    parser = argparse.ArgumentParser(
+        description="Check links in Sand Atlas Jekyll site",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python check_links.py                    # Quick check with hosted data
+  python check_links.py --full             # Full check including external
+  python check_links.py --hosted-only      # Only check hosted data links
+  python check_links.py --ci-mode          # CI mode with full checking
+  python check_links.py --check-deps       # Check CI dependencies
+        """
+    )
+    
+    parser.add_argument(
+        '--full',
+        action='store_true',
+        help='Run full check including external and internal links (slower)'
+    )
+    
+    parser.add_argument(
+        '--hosted-only',
+        action='store_true',
+        help='Only check hosted data links (data.scigem-eng.sydney.edu.au)'
+    )
+    
+    parser.add_argument(
+        '--ci-mode',
+        action='store_true',
+        help='Run in CI mode with full checking and external tools'
+    )
+    
+    parser.add_argument(
+        '--check-deps',
+        action='store_true',
+        help='Check if CI dependencies are installed'
+    )
+    
+    parser.add_argument(
+        '--site-dir',
+        default='_site',
+        help='Directory containing compiled Jekyll site (default: _site)'
+    )
+    
+    parser.add_argument(
+        '--output',
+        help='Output file for detailed report (default: print to console)'
+    )
     
     args = parser.parse_args()
     
-    # Create and run the link checker
+    # Handle dependency check
+    if args.check_deps:
+        checker = SandAtlasLinkChecker(site_dir=args.site_dir)
+        checker._check_ci_dependencies()
+        return
+    
+    # Set up checker with appropriate mode
+    quick_mode = not (args.full or args.ci_mode)
     checker = SandAtlasLinkChecker(
-        site_dir=args.site_dir, 
-        quick_mode=args.quick,
+        site_dir=args.site_dir,
         ci_mode=args.ci_mode,
-        max_sand_types=args.max_sand_types
+        quick_mode=quick_mode
     )
-    results = checker.run(hosted_only=args.hosted_only)
     
-    # Save results
-    checker.save_results(output_format=args.output, output_dir=args.output_dir)
-    
-    # Print summary to console
-    print("\n" + "="*60)
-    print("📊 FINAL SUMMARY")
-    print("="*60)
-    
-    summary = results["summary"]
-    
-    print(f"🗂️  Hosted Data: {summary['hosted_data']['working']}/{summary['hosted_data']['total']} working ({summary['hosted_data']['success_rate']:.1f}%)")
-    
-    if not args.hosted_only:
-        print(f"🌐 External Links: {summary['external_links']['working']}/{summary['external_links']['total']} working ({summary['external_links']['success_rate']:.1f}%)")
+    # Run the check
+    try:
+        results = checker.run(hosted_only=args.hosted_only)
         
-        if summary['internal_links']['total'] > 0:
-            print(f"🏠 Internal Links: {summary['internal_links']['working']}/{summary['internal_links']['total']} working ({summary['internal_links']['success_rate']:.1f}%)")
-    
-    print(f"🔍 Patterns Found: {summary['patterns_found']}")
-    
-    # In CI mode, create GitHub issue content if there are broken links
-    if args.ci_mode:
-        issue_body = checker.create_github_issue_body()
-        if issue_body:
-            issue_file = Path(args.output_dir) / "github_issue.md"
-            with open(issue_file, 'w') as f:
-                f.write(issue_body)
-            print(f"📝 GitHub issue content saved to: {issue_file}")
-    
-    # Exit with error code if there are broken links
-    total_broken = summary.get('total_broken', 0)
+        # Generate and display report
+        report = checker.generate_report()
         
-    if total_broken > 0:
-        print(f"\n⚠️  Found {total_broken} broken links!")
-        sys.exit(1)
-    else:
-        print("\n✅ All checked links are working!")
-        sys.exit(0)
+        if args.output:
+            with open(args.output, 'w') as f:
+                f.write(report)
+            print(f"\n📄 Detailed report saved to: {args.output}")
+        else:
+            print("\n" + "=" * 60)
+            print("📋 LINK CHECK REPORT")
+            print("=" * 60)
+            print(report)
+            
+        # Exit with error code if there are broken links
+        summary = results.get("summary", {})
+        hosted_broken = summary.get("hosted_data_links", {}).get("broken", 0)
+        external_broken = summary.get("external_links", {}).get("broken", 0)
+        internal_broken = summary.get("internal_links", {}).get("broken", 0)
+        
+        total_broken = hosted_broken + external_broken + internal_broken
+        
+        if total_broken > 0:
+            print(f"\n❌ Found {total_broken} broken links")
+            exit(1)
+        else:
+            print("\n✅ All links working!")
+            exit(0)
+            
+    except KeyboardInterrupt:
+        print("\n\n⏹️ Check interrupted by user")
+        exit(1)
+    except Exception as e:
+        print(f"\n💥 Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()
+        exit(1)
 
 if __name__ == "__main__":
     main()
