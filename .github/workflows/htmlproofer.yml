@@ -1,0 +1,39 @@
+name: Link Checker (HTMLProofer)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday at 8:00 AM UTC
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+    
+    - name: Install htmlproofer
+      run: gem install html-proofer
+    
+    - name: Build Jekyll site
+      run: bundle exec jekyll build
+    
+    - name: Test links
+      run: |
+        htmlproofer ./_site \
+          --disable-external \
+          --check-html \
+          --check-img-http \
+          --report-missing-names \
+          --log-level=:info
