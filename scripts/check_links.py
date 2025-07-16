@@ -192,8 +192,8 @@ class SandAtlasLinkChecker:
             
             for pattern in patterns:
                 if '{SAND_ID}' in pattern:
-                    # Replace the placeholder with actual sand ID
-                    url = pattern.replace('{SAND_ID}', f'/{sand_id}/')
+                    # Replace placeholder with sand ID including sands/ prefix
+                    url = pattern.replace('{SAND_ID}', f'/sands/{sand_id}/')
                     total_checks += 1
                     
                     try:
