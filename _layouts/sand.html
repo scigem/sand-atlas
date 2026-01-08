@@ -66,7 +66,7 @@
 				{% endif %}
 			
 				<p>
-					For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.microns_per_pixel}} microns. You can download a <a href="../../_data/csv/{{page.dir}}.csv">list of per-particle shape descriptors here</a>. You can investigate these properties with the graph in the top left of this page. Click on the axis labels to change the property displayed.
+					For this sample we have the surfaces of {{ page.data.number_of_particles }} individual sand grains with a voxel size of {{page.data.microns_per_pixel}} microns. You can download a <a href="../../assets{{ page.dir | split: '/' | join: '/' }}.csv">list of per-particle shape descriptors here</a>. You can investigate these properties with the graph in the top left of this page. Click on the axis labels to change the property displayed.
 				</p>
 
 				<p>
